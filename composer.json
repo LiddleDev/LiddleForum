@@ -1,0 +1,16 @@
+{
+    "name": "liddledev/liddleforum",
+    "description": "A forum package built for Laravel",
+    "authors": [
+        {
+            "name": "Craig Liddle",
+            "email": "craigliddle2@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+	    "psr-4": {
+	      "LiddleDev\\LiddleForum\\": "src/"
+		}
+	}
+}
