@@ -1,5 +1,18 @@
 @extends('liddleforum::layout')
 
+@push(config('liddleforum.blade.stacks.head'))
+<script src="/vendor/liddledev/liddleforum/assets/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector:'#liddleforum-reply-body',
+        toolbar:'{{ config('liddleforum.text_editor.tinymce.toolbar') }}',
+        plugins: '{{ config('liddleforum.text_editor.tinymce.plugins') }}',
+        menubar: false,
+        height: 200
+    });
+</script>
+@endpush
+
 @section('liddleforum_content_inner')
 
     <h3>Create Thread</h3>
@@ -31,8 +44,8 @@
         </div>
 
         <div class="form-group">
-            <label for="body">Message</label>
-            <textarea id="body" name="body" class="form-control" placeholder="Enter your thread message here..."></textarea>
+            <label for="liddleforum-reply-body">Message</label>
+            <textarea id="liddleforum-reply-body" name="body" class="form-control" placeholder="Enter your thread message here..."></textarea>
         </div>
 
         <button class="btn btn-primary">Create Thread</button>
