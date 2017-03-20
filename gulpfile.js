@@ -11,12 +11,25 @@ var gulp = require('gulp'),
 // Minified names
 var applicationCss = 'styles.min.css';
 
-gulp.task('css', function() {
+// LESS Backend
+gulp.task('less', function() {
 
-    gulp.src('./public/css/styles.css')
+    // Frontend
+    return gulp.src('./web/assets/backend/less/styles.less')
+        .pipe(concat('compiled.less'))
+        .pipe(less())
+        .pipe(rename('compiled.css'))
+        .pipe(gulp.dest('./web/assets/backend/css'));
+
+});
+
+// Backend Tasks
+gulp.task('css', ['less'], function() {
+
+    gulp.src('./web/assets/backend/css/compiled.css')
         .pipe(cssnano({zindex: false}))
         .pipe(rename(applicationCss))
-        .pipe(gulp.dest('./public/css/'));
+        .pipe(gulp.dest('./web/assets/backend/css'));
 });
 
 // Default Task
