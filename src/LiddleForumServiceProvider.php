@@ -57,5 +57,14 @@ class LiddleForumServiceProvider extends ServiceProvider
             $className = config('liddleforum.user.avatar.driver');
             return new $className;
         });
+
+        $this->app->bind(\LiddleDev\LiddleForum\Drivers\TextEditor\TextEditorInterface::class, function ($app) {
+            if ( ! config('liddleforum.text_editor.enabled', false)) {
+                return new \LiddleDev\LiddleForum\Drivers\TextEditor\Disabled();
+            }
+
+            $className = config('liddleforum.text_editor.driver');
+            return new $className;
+        });
     }
 }

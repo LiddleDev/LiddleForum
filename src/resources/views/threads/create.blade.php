@@ -1,6 +1,11 @@
 @extends('liddleforum::layout')
 
 @push(config('liddleforum.blade.stacks.head'))
+{!! $textEditor->headerIncludes() !!}
+{!! $textEditor->applyToTextArea('liddleforum-reply-body') !!}
+@endpush
+
+@push(config('liddleforum.blade.stacks.head'))
 <script src="/vendor/liddledev/liddleforum/assets/js/tinymce/tinymce.min.js"></script>
 <script>
     tinymce.init({
@@ -52,3 +57,7 @@
 
     </form>
 @endsection
+
+@push(config('liddleforum.blade.stacks.footer'))
+{!! $textEditor->footerIncludes() !!}
+@endpush

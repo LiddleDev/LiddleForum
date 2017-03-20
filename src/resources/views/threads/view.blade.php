@@ -1,16 +1,8 @@
 @extends('liddleforum::layout')
 
 @push(config('liddleforum.blade.stacks.head'))
-<script src="/vendor/liddledev/liddleforum/assets/js/tinymce/tinymce.min.js"></script>
-<script>
-	tinymce.init({
-		selector:'#liddleforum-reply-body',
-		toolbar:'{{ config('liddleforum.text_editor.tinymce.toolbar') }}',
-		plugins: '{{ config('liddleforum.text_editor.tinymce.plugins') }}',
-		menubar: false,
-		height: 200
-	});
-</script>
+{!! $textEditor->headerIncludes() !!}
+{!! $textEditor->applyToTextArea('liddleforum-reply-body') !!}
 @endpush
 
 @section('liddleforum_content_inner')
@@ -53,5 +45,8 @@
 
 	</div>
 
-
 @endsection
+
+@push(config('liddleforum.blade.stacks.footer'))
+{!! $textEditor->footerIncludes() !!}
+@endpush

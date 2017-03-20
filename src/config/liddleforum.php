@@ -73,7 +73,8 @@ return [
 
 
     'text_editor' => [
-        'driver' => 'tinymce',
+        'enabled' => true,
+        'driver' => \LiddleDev\LiddleForum\Drivers\TextEditor\TinyMCE::class,
 
         'tinymce' => [
             'plugins' => 'link image',

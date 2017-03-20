@@ -5,6 +5,7 @@ namespace LiddleDev\LiddleForum\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Drivers\Avatar\AvatarInterface;
+use LiddleDev\LiddleForum\Drivers\TextEditor\TextEditorInterface;
 use LiddleDev\LiddleForum\Helpers\ThreadHelper;
 use LiddleDev\LiddleForum\Models\Category;
 use LiddleDev\LiddleForum\Models\Post;
@@ -23,10 +24,16 @@ class ThreadsController extends Controller
      */
     private $avatar;
 
-    public function __construct(ThreadHelper $threadHelper, AvatarInterface $avatar)
+    /**
+     * @var TextEditorInterface
+     */
+    private $textEditor;
+
+    public function __construct(ThreadHelper $threadHelper, AvatarInterface $avatar, TextEditorInterface $textEditor)
     {
         $this->threadHelper = $threadHelper;
         $this->avatar = $avatar;
+        $this->textEditor = $textEditor;
     }
 
     public function getCreate()
@@ -35,6 +42,7 @@ class ThreadsController extends Controller
 
         return view('liddleforum::threads.create', [
             'categories' => $categories,
+            'textEditor' => $this->textEditor,
         ]);
     }
 
@@ -75,6 +83,7 @@ class ThreadsController extends Controller
             'thread' => $thread,
             'posts' => $posts,
             'avatar' => $this->avatar,
+            'textEditor' => $this->textEditor,
         ]);
     }
 
