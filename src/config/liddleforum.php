@@ -72,6 +72,13 @@ return [
     ],
 
 
-    'text_editor' => 'textarea',
+    'text_editor' => [
+        'driver' => 'tinymce',
+
+        'tinymce' => [
+            'plugins' => 'link image',
+            'toolbar' => 'bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+        ],
+    ],
 
 ];

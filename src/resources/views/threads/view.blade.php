@@ -1,8 +1,16 @@
 @extends('liddleforum::layout')
 
 @push(config('liddleforum.blade.stacks.head'))
-<script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'#liddleforum-reply-body' });</script>
+<script src="/vendor/liddledev/liddleforum/assets/js/tinymce/tinymce.min.js"></script>
+<script>
+	tinymce.init({
+		selector:'#liddleforum-reply-body',
+		toolbar:'{{ config('liddleforum.text_editor.tinymce.toolbar') }}',
+		plugins: '{{ config('liddleforum.text_editor.tinymce.plugins') }}',
+		menubar: false,
+		height: 200
+	});
+</script>
 @endpush
 
 @section('liddleforum_content_inner')
@@ -34,11 +42,11 @@
 				{!! csrf_field() !!}
 
 				<div class="form-group">
-					<label for="body">Reply</label>
-					<textarea id="body" name="body" class="form-control" placeholder="Enter your reply here..."></textarea>
+					<label for="liddleforum-reply-body">Reply</label>
+					<textarea id="liddleforum-reply-body" name="body" class="form-control" placeholder="Enter your reply here..."></textarea>
 				</div>
 
-				<button class="btn btn-primary">Submit Reply</button>
+				<button class="btn btn-primary">Reply</button>
 
 			</form>
 		</div>

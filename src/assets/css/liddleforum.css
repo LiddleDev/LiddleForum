@@ -1,0 +1,50 @@
+.subcategory-title {
+    font-size: 1.3em;
+}
+
+.category-list .subcategory-table td {
+    vertical-align: middle;
+}
+
+.category-list .subcategory-table td p {
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.thread-list .thread-table td p {
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.liddleforum-post {
+    padding: 10px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.liddleforum-container .thread-title {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.liddleforum-container .liddleforum-avatar {
+    float: left;
+    margin: 5px;
+    margin-right: 15px;
+    position: absolute;
+    left: 10px;
+}
+
+.liddleforum-container .liddleforum-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.liddleforum-container .post-body {
+    margin-left: 80px;
+    min-height: 70px;
+}

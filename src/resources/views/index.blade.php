@@ -19,8 +19,6 @@
 
 @section('liddleforum_content_inner')
 
-	<h3>Index</h3>
-
 	<div class="category-list">
 	@foreach($categories as $category)
 		<div class="panel panel-default category-item">
