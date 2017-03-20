@@ -56,6 +56,12 @@ return [
     ],
 
 
+    'text' => [
+        'heading' => 'LiddleForum',
+        'subheading' => 'A simple forum for your Laravel application',
+    ],
+
+
     'middleware' => [
         'global' => ['web'],
     ],

@@ -40,7 +40,9 @@
 				@foreach($category->subcategories as $subcategory)
 					<tr>
 						<td>
-							<p class="subcategory-title"><a href="{{ route('liddleforum.categories.view', ['category' => $subcategory->slug]) }}">{{ $subcategory->name }}</a></p>
+							<p class="subcategory-title">
+								<a href="{{ route('liddleforum.categories.view', ['category' => $subcategory->slug]) }}">{{ $subcategory->name }}</a>
+							</p>
 							<p class="subcategory-description">{{ $subcategory->description }}</p>
 						</td>
 						<td class="text-center hidden-xs">{{ $subcategory->threads()->count() }}</td>
