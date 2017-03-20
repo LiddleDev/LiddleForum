@@ -48,7 +48,11 @@
 						<?php $mostRecentPost = $subcategory->getMostRecentPost(); ?>
 						<td class="text-right hidden-xs hidden-sm">
 							@if ($mostRecentPost)
-								<p><a href="{{ route('liddleforum.threads.view', ['thread_slug' => $mostRecentPost->thread->slug]) }}">{{ $mostRecentPost->thread->title }}</a></p>
+								<p>
+									<a href="{{ route('liddleforum.threads.view', ['thread_slug' => $mostRecentPost->thread->slug]) }}">
+										{{ str_limit($mostRecentPost->thread->title, 40) }}
+									</a>
+								</p>
 								<p>
 									<small>
 										by {{ $mostRecentPost->user->{config('liddleforum.user.name_column')} }}
