@@ -16,11 +16,6 @@ use HTMLPurifier;
 class ThreadsController extends Controller
 {
     /**
-     * @var ThreadHelper
-     */
-    private $threadHelper;
-
-    /**
      * @var AvatarInterface
      */
     private $avatar;
@@ -35,9 +30,8 @@ class ThreadsController extends Controller
      */
     private $htmlPurifier;
 
-    public function __construct(ThreadHelper $threadHelper, AvatarInterface $avatar, TextEditorInterface $textEditor, HTMLPurifier $htmlPurifier)
+    public function __construct(AvatarInterface $avatar, TextEditorInterface $textEditor, HTMLPurifier $htmlPurifier)
     {
-        $this->threadHelper = $threadHelper;
         $this->avatar = $avatar;
         $this->textEditor = $textEditor;
         $this->htmlPurifier = $htmlPurifier;
@@ -57,7 +51,7 @@ class ThreadsController extends Controller
     {
         $category = Category::where('slug', '=', $request->input('category'))->first();
 
-        $slug = $this->threadHelper->generateSlug($request->input('title'));
+        $slug = ThreadHelper::generateSlug($request->input('title'));
 
         $thread = Thread::create([
             'title' => $request->input('title'),

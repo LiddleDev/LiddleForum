@@ -45,10 +45,6 @@ class LiddleForumServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\LiddleDev\LiddleForum\Helpers\ThreadHelper::class, function ($app) {
-            return new \LiddleDev\LiddleForum\Helpers\ThreadHelper();
-        });
-
         $this->app->bind(\LiddleDev\LiddleForum\Drivers\Avatar\AvatarInterface::class, function ($app) {
             if ( ! config('liddleforum.user.avatar.enabled', false)) {
                 return new \LiddleDev\LiddleForum\Drivers\Avatar\Disabled();

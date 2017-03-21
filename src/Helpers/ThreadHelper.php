@@ -6,11 +6,11 @@ use LiddleDev\LiddleForum\Models\Thread;
 
 class ThreadHelper
 {
-    protected $reservedSlugs = [
+    protected static $reservedSlugs = [
         'create',
     ];
 
-    public function generateSlug($title)
+    public static function generateSlug($title)
     {
         if ( ! $title) {
             return null;
@@ -22,14 +22,14 @@ class ThreadHelper
         do {
             $slug = str_slug($title) . ($attempt > 0 ? $attempt : '');
             $attempt++;
-        } while ($this->doesSlugExist($slug));
+        } while (self::doesSlugExist($slug));
 
         return $slug;
     }
 
-    protected function doesSlugExist($slug)
+    protected static function doesSlugExist($slug)
     {
-        if (in_array($slug, $this->reservedSlugs)) {
+        if (in_array($slug, self::$reservedSlugs)) {
             return true;
         }
 
