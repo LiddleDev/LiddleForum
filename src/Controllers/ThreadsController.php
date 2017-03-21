@@ -97,6 +97,10 @@ class ThreadsController extends Controller
             abort(404);
         }
 
+        if (Gate::denies('edit', $thread)) {
+            abort(403);
+        }
+
         return view('liddleforum::threads.edit', [
             'thread' => $thread,
         ]);
@@ -108,6 +112,10 @@ class ThreadsController extends Controller
             abort(404);
         }
 
+        if (Gate::denies('edit', $thread)) {
+            abort(403);
+        }
+
         // TODO
         return view('liddleforum::threads.edit');
     }
@@ -116,6 +124,10 @@ class ThreadsController extends Controller
     {
         if ( ! $thread = $this->fetchThread($thread_slug)) {
             abort(404);
+        }
+
+        if (Gate::denies('delete', $thread)) {
+            abort(403);
         }
 
         // TODO

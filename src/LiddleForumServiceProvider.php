@@ -3,15 +3,17 @@
 namespace LiddleDev\LiddleForum;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Access\Gate;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class LiddleForumServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
      *
-     * @return void
+     * @param GateContract $gate
      */
-    public function boot()
+    public function boot(GateContract $gate)
     {
         $this->publishes([
             __DIR__ . '/assets' => public_path('vendor/liddledev/liddleforum/assets'),
@@ -36,6 +38,8 @@ class LiddleForumServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/liddleforum'),
         ]);
+
+        $this->registerPolicies($gate);
     }
 
     /**
@@ -72,5 +76,11 @@ class LiddleForumServiceProvider extends ServiceProvider
             $config = \HTMLPurifier_Config::createDefault();
             return new \HTMLPurifier($config);
         });
+    }
+
+    protected function registerPolicies(GateContract $gate)
+    {
+        $gate->policy(\LiddleDev\LiddleForum\Models\Thread::class, \LiddleDev\LiddleForum\Policies\ThreadPolicy::class);
+        $gate->policy(\LiddleDev\LiddleForum\Models\Post::class, \LiddleDev\LiddleForum\Policies\PostPolicy::class);
     }
 }

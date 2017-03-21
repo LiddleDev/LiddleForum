@@ -20,12 +20,10 @@ class TinyMCE implements TextEditorInterface
         }
 
         return <<<EOF
-<script>
 	tinymce.init({
 		selector:'#{$textareaId}'
 		{$configString}
 	});
-</script>
 EOF;
     }
 

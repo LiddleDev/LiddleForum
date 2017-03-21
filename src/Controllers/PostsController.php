@@ -2,6 +2,7 @@
 
 namespace LiddleDev\LiddleForum\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Models\Post;
@@ -27,6 +28,10 @@ class PostsController extends Controller
             abort(404);
         }
 
+        if (Gate::denies('reply', $thread)) {
+            abort(403);
+        }
+
         $body = $request->input('body');
         $body = $this->htmlPurifier->purify($body);
 
@@ -49,6 +54,10 @@ class PostsController extends Controller
             abort(404);
         }
 
+        if (Gate::denies('edit', $post)) {
+            abort(403);
+        }
+
         // TODO
         return 'todo';
     }
@@ -57,6 +66,10 @@ class PostsController extends Controller
     {
         if ( ! $post = $this->fetchPost($thread_slug, $post_id)) {
             abort(404);
+        }
+
+        if (Gate::denies('delete', $post)) {
+            abort(403);
         }
 
         // TODO

@@ -26,13 +26,9 @@ class Trumbowyg implements TextEditorInterface
             $configString .= $key . ': ' . $value;
         }
         return <<<EOF
-<script>
-    $(function() {    
-        $('#{$textareaId}').trumbowyg({
-            {$configString}
-        });
+    $('#{$textareaId}').trumbowyg({
+        {$configString}
     });
-</script>
 EOF;
     }
 
