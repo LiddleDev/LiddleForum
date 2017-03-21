@@ -24,15 +24,21 @@ return [
              * UserColumn: \LiddleDev\LiddleForum\Drivers\Avatar\UserColumn::class
              * Use a direct URL from your user table
              */
-            'driver' => \LiddleDev\LiddleForum\Drivers\Avatar\Gravatar::class,
+            'driver' => 'gravatar',
 
-            'gravatar' => [
-                'email_column' => 'email',
-                'default' => 'mm',
+            'drivers' => [
+                'gravatar' => [
+                    'class' => \LiddleDev\LiddleForum\Drivers\Avatar\Gravatar::class,
+                    'email_column' => 'email',
+                    'default' => 'mm',
+                ],
+
+                'user_column' => [
+                    'class' => \LiddleDev\LiddleForum\Drivers\Avatar\UserColumn::class,
+                    'url_column' => 'avatar_url',
+                ],
             ],
-            'user_column' => [
-                'url_column' => 'avatar_url',
-            ],
+
         ],
     ],
 
@@ -74,12 +80,22 @@ return [
 
     'text_editor' => [
         'enabled' => true,
-        'driver' => \LiddleDev\LiddleForum\Drivers\TextEditor\TinyMCE::class,
+        'driver' => 'tinymce',
 
-        'tinymce' => [
-            'plugins' => 'link image',
-            'toolbar' => 'bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+        'drivers' => [
+            'tinymce' => [
+                'class' => \LiddleDev\LiddleForum\Drivers\TextEditor\TinyMCE::class,
+                'plugins' => 'link image',
+                'toolbar' => 'bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+            ],
+
+            'tinymce' => [
+                'class' => \LiddleDev\LiddleForum\Drivers\TextEditor\TinyMCE::class,
+                'plugins' => 'link image',
+                'toolbar' => 'bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+            ],
         ],
+
     ],
 
 ];

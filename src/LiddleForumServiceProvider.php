@@ -54,7 +54,9 @@ class LiddleForumServiceProvider extends ServiceProvider
                 return new \LiddleDev\LiddleForum\Drivers\Avatar\Disabled();
             }
 
-            $className = config('liddleforum.user.avatar.driver');
+            $driver = config('liddleforum.user.avatar.driver');
+            $className = config('liddleforum.user.avatar.drivers.' . $driver . '.class');
+
             return new $className;
         });
 
@@ -63,7 +65,9 @@ class LiddleForumServiceProvider extends ServiceProvider
                 return new \LiddleDev\LiddleForum\Drivers\TextEditor\Disabled();
             }
 
-            $className = config('liddleforum.text_editor.driver');
+            $driver = config('liddleforum.text_editor.driver');
+            $className = config('liddleforum.text_editor.drivers.' . $driver . '.class');
+
             return new $className;
         });
 
