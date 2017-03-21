@@ -8,6 +8,9 @@
 	<div class="liddleforum-thread">
 
 		@can('update', $thread)
+			@can('lock', $thread)
+				<a href="#" class="btn btn-warning btn-sm pull-right" style="margin-left: 4px;">{{ $thread->locked ? 'Unlock' : 'Lock' }}</a>
+			@endcan
 			@can('sticky', $thread)
 				<a href="#" class="btn btn-warning btn-sm pull-right" style="margin-left: 4px;">Sticky</a>
 			@endcan

@@ -15,7 +15,11 @@ class ThreadPolicy
      */
     final public function update(Model $user, Thread $thread)
     {
-        return $this->edit($user, $thread) || $this->delete($user, $thread) || $this->sticky($user, $thread);
+        return $this->edit($user, $thread)
+            || $this->delete($user, $thread)
+            || $this->sticky($user, $thread)
+            || $this->lock($user, $thread)
+        ;
     }
 
     public function edit(Model $user, Thread $thread)
@@ -39,6 +43,12 @@ class ThreadPolicy
     public function sticky(Model $user, Thread $thread)
     {
         // TODO check if admin/moderator
-        return true;
+        return false;
+    }
+
+    public function lock(Model $user, Thread $thread)
+    {
+        // TODO check if admin/moderator
+        return false;
     }
 }
