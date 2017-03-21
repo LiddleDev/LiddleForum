@@ -28,9 +28,18 @@ class PostPolicy
 
     public function delete(Model $user, Post $post)
     {
+        if ($user->getKey() !== $post->user_id) {
+            return false;
+        }
+
         if ($post->thread->locked) {
             return false;
         }
-        return $user->getKey() === $post->user_id;
+        // Don't let users delete the original post of a thread. Instead, they should delete the whole thread
+        if ($post->thread->getOriginalPost()->id === $post->id) {
+            return false;
+        }
+
+        return true;
     }
 }
