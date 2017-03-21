@@ -82,7 +82,8 @@ class Category extends LiddleForumModel
         $thread = new Thread();
         $post = new Post();
 
-        return Post::join($thread->getTable(), $thread->getTable() . '.' . $thread->getKeyName(), '=', $post->getTable() . '.thread_id')
+        return Post::select($post->getTable() . '.*')
+            ->join($thread->getTable(), $thread->getTable() . '.' . $thread->getKeyName(), '=', $post->getTable() . '.thread_id')
             ->whereIn($thread->getTable() . '.category_id', $categoryIds)
             ->orderBy($post->getTable() . '.created_at', 'DESC')->first();
     }
@@ -102,8 +103,8 @@ class Category extends LiddleForumModel
         }
 
         foreach ($subcategories as $category) {
+            $allSubcategories = array_merge($allSubcategories, $category->getSubcategoriesRecursively());
             $allSubcategories[] = $category;
-            $allSubcategories += $category->getSubcategoriesRecursively();
         }
 
         return $allSubcategories;
