@@ -52,6 +52,19 @@ class Category extends LiddleForumModel
         return array_reverse($categoryChain);
     }
 
+    public function getDropdownName()
+    {
+        $dropdownName = '';
+
+        foreach ($this->getCategoryChain() as $parentCategory) {
+            $dropdownName .= $parentCategory->name . ' > ';
+        }
+
+        $dropdownName .= $this->name;
+
+        return $dropdownName;
+    }
+
     /**
      * @return Post
      */

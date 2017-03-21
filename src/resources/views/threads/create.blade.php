@@ -28,18 +28,9 @@
         <div class="form-group">
             <label for="category">Category</label>
             <select id="category" name="category" class="form-control">
-                <?php $currentCategory = null; ?>
                 @foreach($categories as $category)
-                    <?php if ( ! $currentCategory || $currentCategory->id !== $category->parent->id) : ?>
-                        @if($currentCategory)
-                            </optgroup>
-                        @endif
-                        <?php $currentCategory = $category->parent; ?>
-                        <optgroup label="{{ $currentCategory->name }}">
-                    <?php endif ?>
-                    <option value="{{ $category->slug }}" @if(Request::get('category') === $category->slug) selected @endif>{{ $category->name }}</option>
+                    <option value="{{ $category->slug }}" @if(Request::get('category') === $category->slug) selected @endif>{{ $category->getDropdownName() }}</option>
                 @endforeach
-                </optgroup>
             </select>
         </div>
 
