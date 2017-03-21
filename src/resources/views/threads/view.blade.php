@@ -2,7 +2,6 @@
 
 @push(config('liddleforum.blade.stacks.head'))
 {!! $textEditor->headerIncludes() !!}
-{!! $textEditor->applyToTextArea('liddleforum-reply-body') !!}
 @endpush
 
 @section('liddleforum_content_inner')
@@ -49,4 +48,5 @@
 
 @push(config('liddleforum.blade.stacks.footer'))
 {!! $textEditor->footerIncludes() !!}
+{!! $textEditor->applyToTextArea('liddleforum-reply-body') !!}
 @endpush
