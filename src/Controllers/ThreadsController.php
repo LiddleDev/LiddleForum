@@ -10,6 +10,7 @@ use LiddleDev\LiddleForum\Helpers\ThreadHelper;
 use LiddleDev\LiddleForum\Models\Category;
 use LiddleDev\LiddleForum\Models\Post;
 use LiddleDev\LiddleForum\Models\Thread;
+use HTMLPurifier;
 
 
 class ThreadsController extends Controller
@@ -29,11 +30,17 @@ class ThreadsController extends Controller
      */
     private $textEditor;
 
-    public function __construct(ThreadHelper $threadHelper, AvatarInterface $avatar, TextEditorInterface $textEditor)
+    /**
+     * @var HTMLPurifier
+     */
+    private $htmlPurifier;
+
+    public function __construct(ThreadHelper $threadHelper, AvatarInterface $avatar, TextEditorInterface $textEditor, HTMLPurifier $htmlPurifier)
     {
         $this->threadHelper = $threadHelper;
         $this->avatar = $avatar;
         $this->textEditor = $textEditor;
+        $this->htmlPurifier = $htmlPurifier;
     }
 
     public function getCreate()
@@ -59,9 +66,12 @@ class ThreadsController extends Controller
             'slug' => $slug,
         ]);
 
+        $body = $request->input('body');
+        $body = $this->htmlPurifier->purify($body);
+
         $post = $thread->posts()->create([
             'user_id' => \Auth::user()->getKey(),
-            'body' => $request->input('body'),
+            'body' => $body,
         ]);
 
         $request->session()->flash('liddleforum_success', 'Your thread has been created');

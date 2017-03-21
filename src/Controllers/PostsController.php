@@ -6,19 +6,34 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Models\Post;
 use LiddleDev\LiddleForum\Models\Thread;
+use HTMLPurifier;
 
 class PostsController extends Controller
 {
+    /**
+     * @var HTMLPurifier
+     */
+    private $htmlPurifier;
+
+    public function __construct(HTMLPurifier $htmlPurifier)
+    {
+
+        $this->htmlPurifier = $htmlPurifier;
+    }
+
     public function postCreate(Request $request, $thread_slug)
     {
         if ( ! $thread = $this->fetchThread($thread_slug)) {
             abort(404);
         }
 
+        $body = $request->input('body');
+        $body = $this->htmlPurifier->purify($body);
+
         Post::create([
             'thread_id' => $thread->getKey(),
             'user_id' => \Auth::user()->getKey(),
-            'body' => $request->input('body'),
+            'body' => $body,
         ]);
 
         $request->session()->flash('success', 'Your reply has been posted');

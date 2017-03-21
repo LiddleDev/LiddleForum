@@ -66,5 +66,11 @@ class LiddleForumServiceProvider extends ServiceProvider
             $className = config('liddleforum.text_editor.driver');
             return new $className;
         });
+
+        $this->app->bind(\HTMLPurifier::class, function ($app) {
+            // TODO pull config from liddleforum config
+            $config = \HTMLPurifier_Config::createDefault();
+            return new \HTMLPurifier($config);
+        });
     }
 }
