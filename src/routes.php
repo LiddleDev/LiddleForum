@@ -106,7 +106,7 @@ Route::group([
                     // Delete
                     Route::delete('/', [
                         'as' => 'delete',
-                        'uses' => 'PostsController@deleteReply',
+                        'uses' => 'PostsController@deletePost',
                     ]);
 
                 });

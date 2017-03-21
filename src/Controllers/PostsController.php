@@ -62,7 +62,7 @@ class PostsController extends Controller
         return 'todo';
     }
 
-    public function deletePost($thread_slug, $post_id)
+    public function deletePost(Request $request, $thread_slug, $post_id)
     {
         if ( ! $post = $this->fetchPost($thread_slug, $post_id)) {
             abort(404);
@@ -72,8 +72,12 @@ class PostsController extends Controller
             abort(403);
         }
 
-        // TODO
-        return 'todo';
+        $thread = $post->thread;
+
+        $post->delete();
+
+        $request->session()->flash('success', 'Post has been deleted');
+        return redirect()->route('liddleforum.threads.view', ['slug' => $thread->slug]);
     }
 
     /**

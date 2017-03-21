@@ -15,7 +15,13 @@
 				<a href="#" class="btn btn-warning btn-sm pull-right" style="margin-left: 4px;">Sticky</a>
 			@endcan
 			@can('delete', $thread)
-				<a href="#" class="btn btn-danger btn-sm pull-right" style="margin-left: 4px;">Delete</a>
+				<div class="pull-right" style="margin-left: 4px;">
+					<form method="POST" action="{{ route('liddleforum.threads.delete', ['thread_slug' => $thread->slug]) }}">
+						<input type="hidden" name="_method" value="DELETE">
+						{!! csrf_field() !!}
+						<button class="btn btn-danger btn-sm">Delete</button>
+					</form>
+				</div>
 			@endcan
 			@can('edit', $thread)
 				<a href="#" class="btn btn-info btn-sm pull-right" style="margin-left: 4px;">Edit</a>
@@ -46,7 +52,11 @@
 						<a href="#" class="btn btn-info btn-sm">Edit</a>
 					@endcan
 					@can('delete', $post)
-						<a href="#" class="btn btn-danger btn-sm">Delete</a>
+						<form style="display: inline-block;" method="POST" action="{{ route('liddleforum.threads.posts.delete', ['thread_slug' => $thread->slug, 'post_id' => $post->id]) }}">
+							<input type="hidden" name="_method" value="DELETE">
+							{!! csrf_field() !!}
+							<button class="btn btn-danger btn-sm">Delete</button>
+						</form>
 					@endcan
 				@endcan
 			</div>

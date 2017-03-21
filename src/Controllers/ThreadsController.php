@@ -2,6 +2,7 @@
 
 namespace LiddleDev\LiddleForum\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Drivers\Avatar\AvatarInterface;
@@ -120,7 +121,7 @@ class ThreadsController extends Controller
         return view('liddleforum::threads.edit');
     }
 
-    public function deleteThread($thread_slug)
+    public function deleteThread(Request $request, $thread_slug)
     {
         if ( ! $thread = $this->fetchThread($thread_slug)) {
             abort(404);
@@ -130,8 +131,12 @@ class ThreadsController extends Controller
             abort(403);
         }
 
-        // TODO
-        return 'todo';
+        $category = $thread->category;
+
+        $thread->delete();
+
+        $request->session()->flash('success', 'Thread has been deleted');
+        return redirect()->route('liddleforum.categories.view', ['category' => $category->slug]);
     }
 
     /**
