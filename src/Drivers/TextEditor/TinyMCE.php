@@ -12,17 +12,18 @@ class TinyMCE implements TextEditorInterface
      */
     public function applyToTextArea($textareaId)
     {
-        $toolbar = config('liddleforum.text_editor.tinymce.toolbar');
-        $plugins = config('liddleforum.text_editor.tinymce.plugins');
+        $configString = '';
+
+        $config = config('liddleforum.text_editor.drivers.tinymce.config', []);
+        foreach ($config as $key => $value) {
+            $configString .= ',' . $key . ': ' . $value;
+        }
 
         return <<<EOF
 <script>
 	tinymce.init({
-		selector:'#{$textareaId}',
-		toolbar:'{$toolbar}',
-		plugins: '{$plugins}',
-		menubar: false,
-		height: 200
+		selector:'#{$textareaId}'
+		{$configString}
 	});
 </script>
 EOF;

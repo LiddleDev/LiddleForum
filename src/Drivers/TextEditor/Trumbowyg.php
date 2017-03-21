@@ -12,10 +12,25 @@ class Trumbowyg implements TextEditorInterface
      */
     public function applyToTextArea($textareaId)
     {
+        $configString = '';
+
+        $config = config('liddleforum.text_editor.drivers.trumbowyg.config', []);
+        $first = true;
+        foreach ($config as $key => $value) {
+            if ($first) {
+                $first = false;
+            } else {
+                $configString .= ',';
+            }
+
+            $configString .= $key . ': ' . $value;
+        }
         return <<<EOF
 <script>
     $(function() {    
-        $('#{$textareaId}').trumbowyg();
+        $('#{$textareaId}').trumbowyg({
+            {$configString}
+        });
     });
 </script>
 EOF;

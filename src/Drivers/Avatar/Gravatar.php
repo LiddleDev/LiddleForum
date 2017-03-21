@@ -10,7 +10,7 @@ class Gravatar implements AvatarInterface
 
     public function getUrl(Model $user)
     {
-        if ( ! $column = config('liddleforum.user.avatar.gravatar.email_column')) {
+        if ( ! $column = config('liddleforum.user.avatar.drivers.gravatar.email_column')) {
             throw new \Exception('Can\'t find gravatar email_column in config');
         }
 
@@ -20,7 +20,7 @@ class Gravatar implements AvatarInterface
 
         $hash = md5(strtolower(trim($email)));
 
-        $default = config('liddleforum.user.avatar.gravatar.default', 'mm');
+        $default = config('liddleforum.user.avatar.drivers.gravatar.default', 'mm');
 
         return sprintf(self::IMAGE_URL, $hash, $default);
     }

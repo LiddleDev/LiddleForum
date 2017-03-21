@@ -15,14 +15,7 @@ return [
             'default_url' => 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y',
 
             /*
-             * Default avatar drivers provided with this package are listed below. If you'd like to
-             * create your own, please implement \LiddleDev\LiddleForum\Drivers\Avatar\AvatarInterface::class
-             *
-             * Gravatar: \LiddleDev\LiddleForum\Drivers\Avatar\Gravatar::class
-             * Use an email column from your user table to pull their Gravatar
-             *
-             * UserColumn: \LiddleDev\LiddleForum\Drivers\Avatar\UserColumn::class
-             * Use a direct URL from your user table
+             * Please choose from one of the available drivers below or implement your own using AvatarInterface
              */
             'driver' => 'gravatar',
 
@@ -80,19 +73,32 @@ return [
 
     'text_editor' => [
         'enabled' => true,
+
+        /*
+         * Please choose from one of the available drivers below or implement your own using TextEditorInterface
+         */
         'driver' => 'tinymce',
 
         'drivers' => [
             'tinymce' => [
                 'class' => \LiddleDev\LiddleForum\Drivers\TextEditor\TinyMCE::class,
-                'plugins' => 'link image',
-                'toolbar' => 'bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+
+                // https://www.tinymce.com/docs/configure/editor-appearance/
+                'config' => [
+                    'plugins' => '"link image"',
+                    'toolbar' => '"bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image"',
+                    'menubar' => 'false',
+                    'height' => '200',
+                ]
             ],
 
-            'tinymce' => [
-                'class' => \LiddleDev\LiddleForum\Drivers\TextEditor\TinyMCE::class,
-                'plugins' => 'link image',
-                'toolbar' => 'bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+            'trumbowyg' => [
+                'class' => \LiddleDev\LiddleForum\Drivers\TextEditor\Trumbowyg::class,
+
+                // https://alex-d.github.io/Trumbowyg/documentation.html
+                'config' => [
+                    'autogrow' => 'true',
+                ],
             ],
         ],
 

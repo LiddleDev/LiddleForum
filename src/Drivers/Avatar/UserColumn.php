@@ -8,7 +8,7 @@ class UserColumn implements AvatarInterface
 {
     public function getUrl(Model $user)
     {
-        if ( ! $column = config('liddleforum.user.avatar.user_column.url_column')) {
+        if ( ! $column = config('liddleforum.user.avatar.drivers.user_column.url_column')) {
             throw new \Exception('Can\'t find url_column in config');
         }
 
