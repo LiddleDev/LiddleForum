@@ -12,7 +12,7 @@
 				<div class="pull-right" style="margin-left: 4px;">
 					<form method="POST" action="{{ route('liddleforum.threads.' . ($thread->locked ? 'unlock' : 'lock'), ['thread_slug' => $thread->slug]) }}">
 						{!! csrf_field() !!}
-						<button class="btn btn-warning btn-sm">{{ $thread->locked ? 'Unlock' : 'Lock' }}</button>
+						<button class="btn btn-warning btn-sm"><i class="fa fa-fw fa-lock"></i> {{ $thread->locked ? 'Unlock' : 'Lock' }}</button>
 					</form>
 				</div>
 			@endcan
@@ -20,7 +20,7 @@
 				<div class="pull-right" style="margin-left: 4px;">
 					<form method="POST" action="{{ route('liddleforum.threads.' . ($thread->stickied ? 'unsticky' : 'sticky'), ['thread_slug' => $thread->slug]) }}">
 						{!! csrf_field() !!}
-						<button class="btn btn-warning btn-sm">{{ $thread->stickied ? 'Unsticky' : 'Sticky' }}</button>
+						<button class="btn btn-warning btn-sm"><i class="fa fa-fw fa-sticky-note"></i> {{ $thread->stickied ? 'Unsticky' : 'Sticky' }}</button>
 					</form>
 				</div>
 			@endcan
@@ -29,12 +29,14 @@
 					<form method="POST" action="{{ route('liddleforum.threads.delete', ['thread_slug' => $thread->slug]) }}">
 						{!! method_field('DELETE') !!}
 						{!! csrf_field() !!}
-						<button class="btn btn-danger btn-sm">Delete</button>
+						<button class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
 					</form>
 				</div>
 			@endcan
 			@can('edit', $thread)
-				<a href="{{ route('liddleforum.threads.edit', ['thread_slug' => $thread->slug]) }}" class="btn btn-info btn-sm pull-right" style="margin-left: 4px;">Edit</a>
+				<a href="{{ route('liddleforum.threads.edit', ['thread_slug' => $thread->slug]) }}" class="btn btn-info btn-sm pull-right" style="margin-left: 4px;">
+					<i class="fa fa-fw fa-edit"></i> Edit
+				</a>
 			@endcan
 			<div class="clearfix visible-xs" style="margin-bottom: 10px;"></div>
 		@endcan
@@ -59,13 +61,15 @@
 					<div class="clearfix"></div>
 					<hr>
 					@can('edit', $post)
-						<a href="{{ route('liddleforum.threads.posts.edit', ['thread_slug' => $thread->slug, 'post_id' => $post->id]) }}" class="btn btn-info btn-sm">Edit</a>
+						<a href="{{ route('liddleforum.threads.posts.edit', ['thread_slug' => $thread->slug, 'post_id' => $post->id]) }}" class="btn btn-info btn-sm">
+							<i class="fa fa-fw fa-edit"></i> Edit
+						</a>
 					@endcan
 					@can('delete', $post)
 						<form style="display: inline-block;" method="POST" action="{{ route('liddleforum.threads.posts.delete', ['thread_slug' => $thread->slug, 'post_id' => $post->id]) }}">
 							<input type="hidden" name="_method" value="DELETE">
 							{!! csrf_field() !!}
-							<button class="btn btn-danger btn-sm">Delete</button>
+							<button class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
 						</form>
 					@endcan
 				@endcan
@@ -91,6 +95,7 @@
 			<hr>
 			<div class="text-center alert alert-warning">
 				<p>
+					<i class="fa fa-fw fa-warning"></i>
 					@if($thread->locked)
 						You cannot reply to this thread because it has been locked
 					@elseif( ! Auth::check())

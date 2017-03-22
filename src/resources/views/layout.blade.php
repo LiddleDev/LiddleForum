@@ -2,6 +2,7 @@
 
 @push(Config::get('liddleforum.blade.stacks.head'))
 <link href="/vendor/liddledev/liddleforum/assets/css/liddleforum.css" rel="stylesheet">
+<link href="/vendor/liddledev/liddleforum/assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
