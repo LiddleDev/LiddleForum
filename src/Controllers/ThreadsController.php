@@ -107,7 +107,7 @@ class ThreadsController extends Controller
         ]);
     }
 
-    public function postEdit($thread_slug)
+    public function postEdit(Request $request, $thread_slug)
     {
         if ( ! $thread = $this->fetchThread($thread_slug)) {
             abort(404);
@@ -117,8 +117,18 @@ class ThreadsController extends Controller
             abort(403);
         }
 
-        // TODO
-        return view('liddleforum::threads.edit');
+        $slug = ThreadHelper::generateSlug($request->input('title'));
+
+        $thread->update([
+            'title' => $request->input('title'),
+            'slug' => $slug,
+        ]);
+
+        $request->session()->flash('success', 'Thread has been saved');
+
+        return redirect()->route('liddleforum.threads.view', [
+            'thread_slug' => $thread->slug,
+        ]);
     }
 
     public function deleteThread(Request $request, $thread_slug)

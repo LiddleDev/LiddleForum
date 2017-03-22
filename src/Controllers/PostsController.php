@@ -5,6 +5,7 @@ namespace LiddleDev\LiddleForum\Controllers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use LiddleDev\LiddleForum\Drivers\TextEditor\TextEditorInterface;
 use LiddleDev\LiddleForum\Models\Post;
 use LiddleDev\LiddleForum\Models\Thread;
 use HTMLPurifier;
@@ -16,10 +17,15 @@ class PostsController extends Controller
      */
     private $htmlPurifier;
 
-    public function __construct(HTMLPurifier $htmlPurifier)
-    {
+    /**
+     * @var TextEditorInterface
+     */
+    private $textEditor;
 
+    public function __construct(HTMLPurifier $htmlPurifier, TextEditorInterface $textEditor)
+    {
         $this->htmlPurifier = $htmlPurifier;
+        $this->textEditor = $textEditor;
     }
 
     public function postCreate(Request $request, $thread_slug)
@@ -48,7 +54,7 @@ class PostsController extends Controller
         ]);
     }
 
-    public function postEdit($thread_slug, $post_id)
+    public function getEdit($thread_slug, $post_id)
     {
         if ( ! $post = $this->fetchPost($thread_slug, $post_id)) {
             abort(404);
@@ -58,8 +64,32 @@ class PostsController extends Controller
             abort(403);
         }
 
-        // TODO
-        return 'todo';
+        return view('liddleforum::posts.edit', [
+            'textEditor' => $this->textEditor,
+            'thread' => $post->thread,
+            'post' => $post,
+        ]);
+    }
+
+    public function postEdit(Request $request, $thread_slug, $post_id)
+    {
+        if ( ! $post = $this->fetchPost($thread_slug, $post_id)) {
+            abort(404);
+        }
+
+        if (Gate::denies('edit', $post)) {
+            abort(403);
+        }
+
+        $post->update([
+            'body' => $request->input('body'),
+        ]);
+
+        $request->session()->flash('success', 'Reply has been saved');
+
+        return redirect()->route('liddleforum.threads.view', [
+            'thread_slug' => $post->thread->slug,
+        ]);
     }
 
     public function deletePost(Request $request, $thread_slug, $post_id)

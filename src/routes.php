@@ -98,6 +98,12 @@ Route::group([
                 ], function () {
 
                     // Edit
+                    Route::get('edit', [
+                        'as' => 'edit',
+                        'uses' => 'PostsController@getEdit',
+                    ]);
+
+                    // Edit
                     Route::post('edit', [
                         'as' => 'edit',
                         'uses' => 'PostsController@postEdit',

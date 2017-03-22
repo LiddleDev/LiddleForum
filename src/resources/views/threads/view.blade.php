@@ -24,7 +24,7 @@
 				</div>
 			@endcan
 			@can('edit', $thread)
-				<a href="#" class="btn btn-info btn-sm pull-right" style="margin-left: 4px;">Edit</a>
+				<a href="{{ route('liddleforum.threads.edit', ['thread_slug' => $thread->slug]) }}" class="btn btn-info btn-sm pull-right" style="margin-left: 4px;">Edit</a>
 			@endcan
 			<div class="clearfix visible-xs" style="margin-bottom: 10px;"></div>
 		@endcan
@@ -49,7 +49,7 @@
 					<div class="clearfix"></div>
 					<hr>
 					@can('edit', $post)
-						<a href="#" class="btn btn-info btn-sm">Edit</a>
+						<a href="{{ route('liddleforum.threads.posts.edit', ['thread_slug' => $thread->slug, 'post_id' => $post->id]) }}" class="btn btn-info btn-sm">Edit</a>
 					@endcan
 					@can('delete', $post)
 						<form style="display: inline-block;" method="POST" action="{{ route('liddleforum.threads.posts.delete', ['thread_slug' => $thread->slug, 'post_id' => $post->id]) }}">
