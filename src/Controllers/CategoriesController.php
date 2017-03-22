@@ -22,6 +22,7 @@ class CategoriesController extends Controller
             abort(404);
         }
 
+        // TODO this is ordering by thread created_at instead of most recent post created_at
         $threads = $category->threads()
             ->orderBy('stickied', 'DESC')
             ->orderBy('created_at', 'DESC')
