@@ -91,6 +91,12 @@
 										</small>
 									</p>
 									<p>
+										@if($thread->stickied)
+											<i class="fa fa-fw fa-thumb-tack liddleforum-icon-stickied" style="font-size: 1.3em;"></i>
+										@endif
+										@if($thread->locked)
+											<i class="fa fa-fw fa-lock liddleforum-icon-locked" style="font-size: 1.3em;"></i>
+										@endif
 										<a href="{{ route('liddleforum.threads.view', ['thread_slug' => $thread->slug]) }}">{{ $thread->title }}</a>
 									</p>
 								</td>

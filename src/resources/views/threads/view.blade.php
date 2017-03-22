@@ -20,7 +20,7 @@
 				<div class="pull-right" style="margin-left: 4px;">
 					<form method="POST" action="{{ route('liddleforum.threads.' . ($thread->stickied ? 'unsticky' : 'sticky'), ['thread_slug' => $thread->slug]) }}">
 						{!! csrf_field() !!}
-						<button class="btn btn-warning btn-sm"><i class="fa fa-fw fa-sticky-note"></i> {{ $thread->stickied ? 'Unsticky' : 'Sticky' }}</button>
+						<button class="btn btn-warning btn-sm"><i class="fa fa-fw fa-thumb-tack"></i> {{ $thread->stickied ? 'Unsticky' : 'Sticky' }}</button>
 					</form>
 				</div>
 			@endcan

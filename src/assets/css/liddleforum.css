@@ -48,3 +48,13 @@
     margin-left: 80px;
     min-height: 70px;
 }
+
+.liddleforum-icon-locked {
+    color: #d0c700;
+    font-weight: bold;
+}
+
+.liddleforum-icon-stickied {
+    color: #099709;
+    font-weight: bold;
+}
