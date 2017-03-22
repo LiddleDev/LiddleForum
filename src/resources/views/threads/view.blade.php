@@ -63,19 +63,34 @@
 		</div>
 		@endforeach
 
-		<div class="liddleforum-reply">
-			<form method="POST" action="{{ route('liddleforum.threads.posts.create', ['thread_slug' => $thread->slug]) }}">
-				{!! csrf_field() !!}
+		@can('reply', $thread)
+			<div class="liddleforum-reply">
+				<form method="POST" action="{{ route('liddleforum.threads.posts.create', ['thread_slug' => $thread->slug]) }}">
+					{!! csrf_field() !!}
 
-				<div class="form-group">
-					<label for="liddleforum-reply-body">Reply</label>
-					<textarea id="liddleforum-reply-body" name="body" class="form-control" placeholder="Enter your reply here..."></textarea>
-				</div>
+					<div class="form-group">
+						<label for="liddleforum-reply-body">Reply</label>
+						<textarea id="liddleforum-reply-body" name="body" class="form-control" placeholder="Enter your reply here..."></textarea>
+					</div>
 
-				<button class="btn btn-primary">Reply</button>
+					<button class="btn btn-primary">Reply</button>
 
-			</form>
-		</div>
+				</form>
+			</div>
+		@else
+			<hr>
+			<div class="text-center alert alert-warning">
+				<p>
+					@if($thread->locked)
+						You cannot reply to this thread because it has been locked
+					@elseif( ! Auth::check())
+						Please sign in to reply to this thread
+					@else
+						You do not have permission to reply to this thread
+					@endif
+				</p>
+			</div>
+		@endcan
 
 	</div>
 
