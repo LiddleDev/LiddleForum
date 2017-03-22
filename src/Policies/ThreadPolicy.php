@@ -43,12 +43,12 @@ class ThreadPolicy
     public function sticky(Model $user, Thread $thread)
     {
         // TODO check if admin/moderator
-        return false;
+        return true;
     }
 
     public function lock(Model $user, Thread $thread)
     {
         // TODO check if admin/moderator
-        return false;
+        return true;
     }
 }

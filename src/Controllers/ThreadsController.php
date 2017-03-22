@@ -149,6 +149,74 @@ class ThreadsController extends Controller
         return redirect()->route('liddleforum.categories.view', ['category' => $category->slug]);
     }
 
+    public function postLock(Request $request, $thread_slug)
+    {
+        if ( ! $thread = $this->fetchThread($thread_slug)) {
+            abort(404);
+        }
+
+        if (Gate::denies('lock', $thread)) {
+            abort(403);
+        }
+
+        $thread->locked = 1;
+        $thread->save();
+
+        $request->session()->flash('success', 'Thread has been locked');
+        return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
+    }
+
+    public function postUnlock(Request $request, $thread_slug)
+    {
+        if ( ! $thread = $this->fetchThread($thread_slug)) {
+            abort(404);
+        }
+
+        if (Gate::denies('lock', $thread)) {
+            abort(403);
+        }
+
+        $thread->locked = 0;
+        $thread->save();
+
+        $request->session()->flash('success', 'Thread has been unlocked');
+        return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
+    }
+
+    public function postSticky(Request $request, $thread_slug)
+    {
+        if ( ! $thread = $this->fetchThread($thread_slug)) {
+            abort(404);
+        }
+
+        if (Gate::denies('sticky', $thread)) {
+            abort(403);
+        }
+
+        $thread->stickied = 1;
+        $thread->save();
+
+        $request->session()->flash('success', 'Thread has been stickied');
+        return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
+    }
+
+    public function postUnsticky(Request $request, $thread_slug)
+    {
+        if ( ! $thread = $this->fetchThread($thread_slug)) {
+            abort(404);
+        }
+
+        if (Gate::denies('sticky', $thread)) {
+            abort(403);
+        }
+
+        $thread->stickied = 0;
+        $thread->save();
+
+        $request->session()->flash('success', 'Thread has been unstickied');
+        return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
+    }
+
     /**
      * @param $thread_slug
      * @return Thread|null

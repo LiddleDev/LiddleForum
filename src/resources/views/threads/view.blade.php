@@ -9,15 +9,25 @@
 
 		@can('update', $thread)
 			@can('lock', $thread)
-				<a href="#" class="btn btn-warning btn-sm pull-right" style="margin-left: 4px;">{{ $thread->locked ? 'Unlock' : 'Lock' }}</a>
+				<div class="pull-right" style="margin-left: 4px;">
+					<form method="POST" action="{{ route('liddleforum.threads.' . ($thread->locked ? 'unlock' : 'lock'), ['thread_slug' => $thread->slug]) }}">
+						{!! csrf_field() !!}
+						<button class="btn btn-warning btn-sm">{{ $thread->locked ? 'Unlock' : 'Lock' }}</button>
+					</form>
+				</div>
 			@endcan
 			@can('sticky', $thread)
-				<a href="#" class="btn btn-warning btn-sm pull-right" style="margin-left: 4px;">Sticky</a>
+				<div class="pull-right" style="margin-left: 4px;">
+					<form method="POST" action="{{ route('liddleforum.threads.' . ($thread->stickied ? 'unsticky' : 'sticky'), ['thread_slug' => $thread->slug]) }}">
+						{!! csrf_field() !!}
+						<button class="btn btn-warning btn-sm">{{ $thread->stickied ? 'Unsticky' : 'Sticky' }}</button>
+					</form>
+				</div>
 			@endcan
 			@can('delete', $thread)
 				<div class="pull-right" style="margin-left: 4px;">
 					<form method="POST" action="{{ route('liddleforum.threads.delete', ['thread_slug' => $thread->slug]) }}">
-						<input type="hidden" name="_method" value="DELETE">
+						{!! method_field('DELETE') !!}
 						{!! csrf_field() !!}
 						<button class="btn btn-danger btn-sm">Delete</button>
 					</form>

@@ -74,6 +74,30 @@ Route::group([
                 'uses' => 'ThreadsController@postEdit',
             ]);
 
+            // Lock
+            Route::post('lock', [
+                'as' => 'lock',
+                'uses' => 'ThreadsController@postLock',
+            ]);
+
+            // Unlock
+            Route::post('unlock', [
+                'as' => 'unlock',
+                'uses' => 'ThreadsController@postUnlock',
+            ]);
+
+            // Sticky
+            Route::post('sticky', [
+                'as' => 'sticky',
+                'uses' => 'ThreadsController@postSticky',
+            ]);
+
+            // Unsticky
+            Route::post('unsticky', [
+                'as' => 'unsticky',
+                'uses' => 'ThreadsController@postUnsticky',
+            ]);
+
             // Delete
             Route::delete('/', [
                 'as' => 'delete',
