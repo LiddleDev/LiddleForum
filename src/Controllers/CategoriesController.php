@@ -22,7 +22,10 @@ class CategoriesController extends Controller
             abort(404);
         }
 
-        $threads = $category->threads()->orderBy('created_at', 'DESC')->get();
+        $threads = $category->threads()
+            ->orderBy('stickied', 'DESC')
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         return view('liddleforum::categories.view', [
             'category' => $category,
