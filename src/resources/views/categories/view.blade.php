@@ -71,7 +71,7 @@
 				<div class="panel-heading">
 					<span class="panel-title">Threads</span>
 				</div>
-				@if($category->threads()->count())
+				@if(count($threads))
 					<table class="table table-striped table-bordered thread-table">
 						<thead>
 						<tr>
@@ -81,7 +81,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						@foreach($category->threads as $thread)
+						@foreach($threads as $thread)
 							<tr>
 								<td>
 									<p class="pull-right">
