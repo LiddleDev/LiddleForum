@@ -19,6 +19,7 @@ class ThreadPolicy
             || $this->delete($user, $thread)
             || $this->sticky($user, $thread)
             || $this->lock($user, $thread)
+            || $this->follow($user, $thread)
         ;
     }
 
@@ -50,5 +51,10 @@ class ThreadPolicy
     {
         // TODO check if admin/moderator
         return true;
+    }
+
+    public function follow(Model $user, Thread $thread)
+    {
+        return \Auth::check();
     }
 }

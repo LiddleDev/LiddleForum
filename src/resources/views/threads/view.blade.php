@@ -38,6 +38,14 @@
 					<i class="fa fa-fw fa-edit"></i> Edit
 				</a>
 			@endcan
+			@can('follow', $thread)
+				<div class="pull-right" style="margin-left: 4px;">
+					<form method="POST" action="{{ route('liddleforum.threads.' . ($followingThread ? 'unfollow' : 'follow'), ['thread_slug' => $thread->slug]) }}">
+						{!! csrf_field() !!}
+						<button class="btn btn-success btn-sm"><i class="fa fa-fw fa-eye"></i> {{ $followingThread ? 'Unfollow' : 'Follow' }}</button>
+					</form>
+				</div>
+			@endcan
 			<div class="clearfix visible-xs" style="margin-bottom: 10px;"></div>
 		@endcan
 		<p class="thread-title">

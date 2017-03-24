@@ -98,6 +98,18 @@ Route::group([
                 'uses' => 'ThreadsController@postUnsticky',
             ]);
 
+            // Follow
+            Route::post('follow', [
+                'as' => 'follow',
+                'uses' => 'ThreadsController@postFollow',
+            ]);
+
+            // Unfollow
+            Route::post('unfollow', [
+                'as' => 'unfollow',
+                'uses' => 'ThreadsController@postUnfollow',
+            ]);
+
             // Delete
             Route::delete('/', [
                 'as' => 'delete',

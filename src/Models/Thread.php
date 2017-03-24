@@ -23,6 +23,11 @@ class Thread extends LiddleForumModel
         return $this->hasMany(Post::class, 'thread_id');
     }
 
+    public function followers()
+    {
+        return $this->hasMany(ThreadFollower::class, 'thread_id');
+    }
+
     /**
      * @return Post
      */

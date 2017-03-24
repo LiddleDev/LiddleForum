@@ -29,6 +29,8 @@ class CreateLiddleForumThreadFollowersTable extends Migration
             $table->integer('thread_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
+            $table->unique(['thread_id', 'user_id']);
+
             $table
                 ->foreign('thread_id')
                 ->references('id')

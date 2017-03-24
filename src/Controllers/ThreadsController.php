@@ -12,6 +12,7 @@ use LiddleDev\LiddleForum\Models\Category;
 use LiddleDev\LiddleForum\Models\Post;
 use LiddleDev\LiddleForum\Models\Thread;
 use HTMLPurifier;
+use LiddleDev\LiddleForum\Models\ThreadFollower;
 
 
 class ThreadsController extends Controller
@@ -84,10 +85,13 @@ class ThreadsController extends Controller
 
         $posts = $thread->posts()->with('user')->orderBy('created_at')->paginate(config('liddleforum.per_page'));
 
+        $followingThread = (bool)$thread->followers()->where('user_id', '=', \Auth::user()->getKey())->first();
+
         return view('liddleforum::threads.view', [
             'thread' => $thread,
             'posts' => $posts,
             'avatar' => $this->avatar,
+            'followingThread' => $followingThread,
             'textEditor' => $this->textEditor,
         ]);
     }
@@ -214,6 +218,42 @@ class ThreadsController extends Controller
         $thread->save();
 
         $request->session()->flash('success', 'Thread has been unstickied');
+        return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
+    }
+
+    public function postFollow(Request $request, $thread_slug)
+    {
+        if ( ! $thread = $this->fetchThread($thread_slug)) {
+            abort(404);
+        }
+
+        if (Gate::denies('follow', $thread)) {
+            abort(403);
+        }
+
+        if ( ! $thread->followers()->where('user_id', '=', \Auth::user()->getKey())->first()) {
+            $thread->followers()->create([
+                'user_id' => \Auth::user()->getKey(),
+            ]);
+        }
+
+        $request->session()->flash('success', 'You are now following this thread');
+        return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
+    }
+
+    public function postUnfollow(Request $request, $thread_slug)
+    {
+        if ( ! $thread = $this->fetchThread($thread_slug)) {
+            abort(404);
+        }
+
+        if (Gate::denies('follow', $thread)) {
+            abort(403);
+        }
+
+        $thread->followers()->where('user_id', '=', \Auth::user()->getKey())->delete();
+
+        $request->session()->flash('success', 'You have stopped following this thread');
         return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
     }
 

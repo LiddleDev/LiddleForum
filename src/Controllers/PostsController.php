@@ -9,6 +9,7 @@ use LiddleDev\LiddleForum\Drivers\TextEditor\TextEditorInterface;
 use LiddleDev\LiddleForum\Models\Post;
 use LiddleDev\LiddleForum\Models\Thread;
 use HTMLPurifier;
+use LiddleDev\LiddleForum\Notifications\AbstractFollowedThreadReceivedReply;
 
 class PostsController extends Controller
 {
@@ -41,11 +42,25 @@ class PostsController extends Controller
         $body = $request->input('body');
         $body = $this->htmlPurifier->purify($body);
 
-        Post::create([
+        $post = Post::create([
             'thread_id' => $thread->getKey(),
             'user_id' => \Auth::user()->getKey(),
             'body' => $body,
         ]);
+
+        // Send notifications to watchers
+        if (config('liddleforum.notifications.followed_thread_received_reply.enabled')) {
+            $notificationClass = config('liddleforum.notifications.followed_thread_received_reply.class');
+            if ( ! is_subclass_of($notificationClass, AbstractFollowedThreadReceivedReply::class)) {
+                throw new \Exception($notificationClass . ' must extend \LiddleDev\LiddleForum\Notifications\AbstractFollowedThreadReceivedReply to send this notification');
+            }
+
+            $notification = new $notificationClass($thread, $post);
+
+            foreach ($thread->followers()->with('user')->get() as $follower) {
+                $follower->user->notify($notification);
+            }
+        }
 
         $request->session()->flash('success', 'Your reply has been posted');
 

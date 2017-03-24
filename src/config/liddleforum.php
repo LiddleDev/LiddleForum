@@ -104,4 +104,20 @@ return [
 
     ],
 
+    /*
+     * Requires Laravel 5.3 and your User model to use the Illuminate\Notifications\Notifiable trait
+     * You MUST update each class you wish to use to a class of your own that extends the abstract class given
+     *
+     * Find more information about Laravel notifications here: https://laravel.com/docs/5.3/notifications
+     */
+    'notifications' => [
+
+        'followed_thread_received_reply' => [
+            'enabled' => false,
+            // Update this to a class name that extends \LiddleDev\LiddleForum\Notifications\AbstractFollowedThreadReceivedReply
+            'class' => \App\Notifications\FollowedThreadReceivedReply::class,
+        ],
+
+    ],
+
 ];
