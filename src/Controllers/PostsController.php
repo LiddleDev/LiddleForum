@@ -73,7 +73,7 @@ class PostsController extends Controller
             }
         }
 
-        $request->session()->flash('success', 'Your reply has been posted');
+        $request->session()->flash('liddleforum_success', 'Your reply has been posted');
 
         return redirect()->route('liddleforum.threads.view', [
             'thread_slug' => $thread->slug,
@@ -107,11 +107,21 @@ class PostsController extends Controller
             abort(403);
         }
 
+        $validator = Validator::make($request->all(), [
+            'body' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('liddleforum.threads.posts.edit', ['thread_slug' => $thread_slug, 'post_id' => $post_id])
+                ->withErrors($validator, 'liddleforum')
+                ->withInput();
+        }
+
         $post->update([
             'body' => $request->input('body'),
         ]);
 
-        $request->session()->flash('success', 'Reply has been saved');
+        $request->session()->flash('liddleforum_success', 'Reply has been saved');
 
         return redirect()->route('liddleforum.threads.view', [
             'thread_slug' => $post->thread->slug,
@@ -132,7 +142,7 @@ class PostsController extends Controller
 
         $post->delete();
 
-        $request->session()->flash('success', 'Post has been deleted');
+        $request->session()->flash('liddleforum_success', 'Post has been deleted');
         return redirect()->route('liddleforum.threads.view', ['slug' => $thread->slug]);
     }
 

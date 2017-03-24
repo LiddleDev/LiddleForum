@@ -155,7 +155,7 @@ class ThreadsController extends Controller
             'slug' => $slug,
         ]);
 
-        $request->session()->flash('success', 'Thread has been saved');
+        $request->session()->flash('liddleforum_success', 'Thread has been saved');
 
         return redirect()->route('liddleforum.threads.view', [
             'thread_slug' => $thread->slug,
@@ -176,7 +176,7 @@ class ThreadsController extends Controller
 
         $thread->delete();
 
-        $request->session()->flash('success', 'Thread has been deleted');
+        $request->session()->flash('liddleforum_success', 'Thread has been deleted');
         return redirect()->route('liddleforum.categories.view', ['category' => $category->slug]);
     }
 
@@ -193,7 +193,7 @@ class ThreadsController extends Controller
         $thread->locked = 1;
         $thread->save();
 
-        $request->session()->flash('success', 'Thread has been locked');
+        $request->session()->flash('liddleforum_success', 'Thread has been locked');
         return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
     }
 
@@ -210,7 +210,7 @@ class ThreadsController extends Controller
         $thread->locked = 0;
         $thread->save();
 
-        $request->session()->flash('success', 'Thread has been unlocked');
+        $request->session()->flash('liddleforum_success', 'Thread has been unlocked');
         return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
     }
 
@@ -227,7 +227,7 @@ class ThreadsController extends Controller
         $thread->stickied = 1;
         $thread->save();
 
-        $request->session()->flash('success', 'Thread has been stickied');
+        $request->session()->flash('liddleforum_success', 'Thread has been stickied');
         return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
     }
 
@@ -244,7 +244,7 @@ class ThreadsController extends Controller
         $thread->stickied = 0;
         $thread->save();
 
-        $request->session()->flash('success', 'Thread has been unstickied');
+        $request->session()->flash('liddleforum_success', 'Thread has been unstickied');
         return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
     }
 
@@ -264,7 +264,7 @@ class ThreadsController extends Controller
             ]);
         }
 
-        $request->session()->flash('success', 'You are now following this thread');
+        $request->session()->flash('liddleforum_success', 'You are now following this thread');
         return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
     }
 
@@ -280,7 +280,7 @@ class ThreadsController extends Controller
 
         $thread->followers()->where('user_id', '=', \Auth::user()->getKey())->delete();
 
-        $request->session()->flash('success', 'You have stopped following this thread');
+        $request->session()->flash('liddleforum_success', 'You have stopped following this thread');
         return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread->slug]);
     }
 

@@ -9,7 +9,7 @@
 
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ $thread->title }}">
+			<input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ old('title', $thread->title) }}">
 		</div>
 
 		<button class="btn btn-primary">Save</button>

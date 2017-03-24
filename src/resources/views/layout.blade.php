@@ -14,6 +14,8 @@
 
         <hr>
 
+        @include('liddleforum::flashed.flashed')
+
         @yield('liddleforum_content_inner')
     </div>
 
