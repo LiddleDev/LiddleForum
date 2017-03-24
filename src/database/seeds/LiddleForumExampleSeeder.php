@@ -38,6 +38,32 @@ class LiddleForumExampleSeeder extends Seeder
                 'description' => 'Why don\'t you post and introduce yourself?',
                 'order' => 1,
             ],
+            [
+                'parent_id' => 3,
+                'slug' => 'special-intros',
+                'name' => 'Special Intros',
+                'description' => 'Reserved for special people',
+                'order' => 1,
+            ],
+            [
+                'slug' => 'site',
+                'name' => 'Site',
+                'order' => 2,
+            ],
+            [
+                'parent_id' => 5,
+                'slug' => 'bugs',
+                'name' => 'Bugs',
+                'description' => 'Post any bugs you find on the site in here',
+                'order' => 1,
+            ],
+            [
+                'parent_id' => 5,
+                'slug' => 'features',
+                'name' => 'Features',
+                'description' => 'All feature requests should go here',
+                'order' => 2,
+            ],
         ];
 
         Category::unguard();
