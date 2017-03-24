@@ -2,6 +2,7 @@
 
 namespace LiddleDev\LiddleForum\Controllers;
 
+use Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -37,6 +38,16 @@ class PostsController extends Controller
 
         if (Gate::denies('reply', $thread)) {
             abort(403);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'body' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('liddleforum.threads.view', ['thread_slug' => $thread_slug])
+                ->withErrors($validator, 'liddleforum')
+                ->withInput();
         }
 
         $body = $request->input('body');

@@ -2,6 +2,7 @@
 
 namespace LiddleDev\LiddleForum\Controllers;
 
+use Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -9,10 +10,8 @@ use LiddleDev\LiddleForum\Drivers\Avatar\AvatarInterface;
 use LiddleDev\LiddleForum\Drivers\TextEditor\TextEditorInterface;
 use LiddleDev\LiddleForum\Helpers\ThreadHelper;
 use LiddleDev\LiddleForum\Models\Category;
-use LiddleDev\LiddleForum\Models\Post;
 use LiddleDev\LiddleForum\Models\Thread;
 use HTMLPurifier;
-use LiddleDev\LiddleForum\Models\ThreadFollower;
 
 
 class ThreadsController extends Controller
@@ -51,6 +50,20 @@ class ThreadsController extends Controller
 
     public function postCreate(Request $request)
     {
+        $categoryObject = new Category();
+
+        $validator = Validator::make($request->all(), [
+            'category' => 'required|exists:' . $categoryObject->getTable() . ',slug',
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('liddleforum.threads.create')
+                ->withErrors($validator, 'liddleforum')
+                ->withInput();
+        }
+
         $category = Category::where('slug', '=', $request->input('category'))->first();
 
         $slug = ThreadHelper::generateSlug($request->input('title'));
@@ -68,6 +81,10 @@ class ThreadsController extends Controller
         $post = $thread->posts()->create([
             'user_id' => \Auth::user()->getKey(),
             'body' => $body,
+        ]);
+
+        $thread->followers()->create([
+            'user_id' => \Auth::user()->getKey(),
         ]);
 
         $request->session()->flash('liddleforum_success', 'Your thread has been created');
@@ -119,6 +136,16 @@ class ThreadsController extends Controller
 
         if (Gate::denies('edit', $thread)) {
             abort(403);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('liddleforum.threads.edit', ['thread_slug' => $thread_slug])
+                ->withErrors($validator, 'liddleforum')
+                ->withInput();
         }
 
         $slug = ThreadHelper::generateSlug($request->input('title'));
