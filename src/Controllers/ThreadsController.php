@@ -102,7 +102,8 @@ class ThreadsController extends Controller
 
         $posts = $thread->posts()->with('user')->orderBy('created_at')->paginate(config('liddleforum.per_page'));
 
-        $followingThread = (bool)$thread->followers()->where('user_id', '=', \Auth::user()->getKey())->first();
+
+        $followingThread = \Auth::check() && (bool)$thread->followers()->where('user_id', '=', \Auth::user()->getKey())->first();
 
         return view('liddleforum::threads.view', [
             'thread' => $thread,

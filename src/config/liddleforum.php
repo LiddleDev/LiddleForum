@@ -67,7 +67,8 @@ return [
 
 
     'paginate' => [
-        'per_page' => 10,
+        'threads' => 15,
+        'posts' => 10,
     ],
 
 
@@ -114,7 +115,7 @@ return [
 
         'followed_thread_received_reply' => [
             'enabled' => false,
-            // Update this to a class name that extends \LiddleDev\LiddleForum\Notifications\AbstractFollowedThreadReceivedReply
+            // Update this to a class that extends \LiddleDev\LiddleForum\Notifications\AbstractFollowedThreadReceivedReply
             'class' => \App\Notifications\FollowedThreadReceivedReply::class,
         ],
 

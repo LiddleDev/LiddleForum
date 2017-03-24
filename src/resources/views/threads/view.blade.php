@@ -63,7 +63,15 @@
 			</div>
 			<div class="post-body">
 				<span class="pull-right" title="{{ $post->created_at->format('Y-m-d H:i:s') }}">{{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($post->created_at) }}</span>
-				<p><strong>{{ $post->user->{config('liddleforum.user.name_column')} }}</strong></p>
+				<p>
+					<strong>{{ $post->user->{config('liddleforum.user.name_column')} }}</strong>
+					@if(\LiddleDev\LiddleForum\Helpers\UserHelper::isAdmin($post->user))
+						<span class="label label-danger">Admin</span>
+					@endif
+					@if(\LiddleDev\LiddleForum\Helpers\UserHelper::isModerator($post->user, $thread->category))
+						<span class="label label-success">Moderator</span>
+					@endif
+				</p>
 				{!! $post->body !!}
 				@can('update', $post)
 					<div class="clearfix"></div>
