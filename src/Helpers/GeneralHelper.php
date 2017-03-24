@@ -15,16 +15,16 @@ class GeneralHelper
         $amount = null;
         $word = null;
 
-        if ($seconds > (60 * 60 * 24 * 60)) {
+        if ($seconds >= (60 * 60 * 24 * 60)) {
             $amount = round($seconds / (60 * 60 * 24 * 30));
             $word = 'month';
-        } else if ($seconds > (60 * 60 * 24)) {
+        } else if ($seconds >= (60 * 60 * 24)) {
             $amount = round($seconds / (60 * 60 * 24));
             $word = 'day';
-        } else if ($seconds > (60 * 60)) {
+        } else if ($seconds >= (60 * 60)) {
             $amount = round($seconds / (60 * 60));
             $word = 'hour';
-        } else if ($seconds > 60) {
+        } else if ($seconds >= 60) {
             $amount = round($seconds / 60);
             $word = 'minute';
         }

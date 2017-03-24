@@ -14,7 +14,6 @@ class CreateLiddleForumCategoriesTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->integer('order')->default(1);
-            $table->string('color', 6)->nullable();
 
             $table
                 ->foreign('parent_id')

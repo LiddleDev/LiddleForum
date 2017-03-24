@@ -50,7 +50,10 @@
 									<p>
 										<small>
 											by {{ $mostRecentPost->user->{config('liddleforum.user.name_column')} }}
-											- {{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($mostRecentPost->created_at) }}
+											-
+											<span title="{{ $mostRecentPost->created_at->format('Y-m-d H:i:s') }}">
+												{{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($mostRecentPost->created_at) }}
+											</span>
 										</small>
 									</p>
 								@else
@@ -87,7 +90,10 @@
 									<p class="pull-right">
 										<small>
 											by <strong>{{ $thread->author->{config('liddleforum.user.name_column')} }}</strong>
-											- {{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($thread->created_at) }}
+											-
+											<span title="{{ $thread->created_at->format('Y-m-d H:i:s') }}">
+												{{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($thread->created_at) }}
+											</span>
 										</small>
 									</p>
 									<p>
@@ -106,7 +112,12 @@
 									@if ($mostRecentPost)
 										<p>
 											by <strong>{{ $mostRecentPost->user->{config('liddleforum.user.name_column')} }}</strong>
-											<small> - {{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($mostRecentPost->created_at) }}</small>
+											<small>
+												-
+												<span title="{{ $mostRecentPost->created_at->format('Y-m-d H:i:s') }}">
+													{{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($mostRecentPost->created_at) }}
+												</span>
+											</small>
 										</p>
 									@else
 										<p>-</p>

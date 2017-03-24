@@ -62,7 +62,7 @@
 				<img src="{{ $avatar->getUrl($post->user) }}">
 			</div>
 			<div class="post-body">
-				<span class="pull-right">{{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($post->created_at) }}</span>
+				<span class="pull-right" title="{{ $post->created_at->format('Y-m-d H:i:s') }}">{{ \LiddleDev\LiddleForum\Helpers\GeneralHelper::getTimeAgo($post->created_at) }}</span>
 				<p><strong>{{ $post->user->{config('liddleforum.user.name_column')} }}</strong></p>
 				{!! $post->body !!}
 				@can('update', $post)
