@@ -121,7 +121,7 @@ class PostsController extends Controller
             'body' => $request->input('body'),
         ]);
 
-        $request->session()->flash('liddleforum_success', 'Reply has been saved');
+        $request->session()->flash('liddleforum_success', 'Your reply has been saved');
 
         return redirect()->route('liddleforum.threads.view', [
             'thread_slug' => $post->thread->slug,
@@ -142,7 +142,7 @@ class PostsController extends Controller
 
         $post->delete();
 
-        $request->session()->flash('liddleforum_success', 'Post has been deleted');
+        $request->session()->flash('liddleforum_success', 'Your post has been deleted');
         return redirect()->route('liddleforum.threads.view', ['slug' => $thread->slug]);
     }
 

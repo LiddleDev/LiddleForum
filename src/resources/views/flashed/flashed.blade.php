@@ -6,7 +6,7 @@
 @endif
 @if (session('liddleforum_success'))
     <div class="alert alert-success">
-        <p><i class="fa fa-exclamation-triangle"></i> <strong>Congratulations!</strong></p>
+        <p><i class="fa fa-exclamation-triangle"></i> <strong>Success!</strong></p>
         <p>{{ session('liddleforum_success') }}</p>
     </div>
 @endif

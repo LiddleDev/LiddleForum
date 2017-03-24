@@ -155,7 +155,7 @@ class ThreadsController extends Controller
             'slug' => $slug,
         ]);
 
-        $request->session()->flash('liddleforum_success', 'Thread has been saved');
+        $request->session()->flash('liddleforum_success', 'Your thread has been saved');
 
         return redirect()->route('liddleforum.threads.view', [
             'thread_slug' => $thread->slug,
@@ -176,7 +176,7 @@ class ThreadsController extends Controller
 
         $thread->delete();
 
-        $request->session()->flash('liddleforum_success', 'Thread has been deleted');
+        $request->session()->flash('liddleforum_success', 'Your thread has been deleted');
         return redirect()->route('liddleforum.categories.view', ['category' => $category->slug]);
     }
 
