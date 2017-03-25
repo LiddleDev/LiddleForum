@@ -116,8 +116,22 @@ If you are using at least 5.3 you can turn on notifications in the config by set
 
 Note: Your user model needs to use the Notifiable trait
 
+#### Moderators
+
+Since the admin panel does not exist yet, you will have to add any moderators manually in the `liddleforum_moderators` table.
+
+If you want them to be a global moderator, leave `category_id` blank. Otherwise they will only have moderation powers inside the chosen category and all of its children.
+
+### Roadmap
+
+Here are a list of features planned for future versions:
+
+* Admin panel - allows handling moderators and categories instead of doing it manually in the database
+* Themes - provide a way to easily customise the CSS on the forum
+
 ### Final Notes
 
 Please take a good look in `app/config/liddleforum.php` to make sure you customise the forum the way you want it. You'll find notes in there explaining more about each section.
 
 If you have any issues using the forum please create an issue or pull request and I will look into it :)
+
