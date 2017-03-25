@@ -1,22 +1,5 @@
 @extends('liddleforum::layout')
 
-@push(config('liddleforum.blade.stacks.head'))
-<style>
-	.subcategory-title {
-		font-size: 1.3em;
-	}
-
-	.category-list .subcategory-table td {
-		vertical-align: middle;
-	}
-
-	.category-list .subcategory-table td p {
-		vertical-align: middle;
-		margin-bottom: 0;
-	}
-</style>
-@endpush
-
 @section('liddleforum_content_inner')
 
 	<div class="category-list">
