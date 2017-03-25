@@ -127,12 +127,16 @@
 						@endforeach
 						</tbody>
 					</table>
+
 				@else
 					<div class="panel-body">
 						<p>There are no threads yet in this category</p>
 					</div>
 				@endif
 			</div>
+			@if(count($threads))
+				{!! $threads->links() !!}
+			@endif
 		</div>
 	@endif
 

@@ -26,7 +26,7 @@ class CategoriesController extends Controller
         $threads = $category->threads()
             ->orderBy('stickied', 'DESC')
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate(config('liddleforum.paginate.threads', 15));
 
         return view('liddleforum::categories.view', [
             'category' => $category,

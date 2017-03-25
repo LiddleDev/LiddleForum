@@ -100,8 +100,7 @@ class ThreadsController extends Controller
             abort(404);
         }
 
-        $posts = $thread->posts()->with('user')->orderBy('created_at')->paginate(config('liddleforum.per_page'));
-
+        $posts = $thread->posts()->with('user')->orderBy('created_at')->paginate(config('liddleforum.paginate.posts', 10));
 
         $followingThread = \Auth::check() && (bool)$thread->followers()->where('user_id', '=', \Auth::user()->getKey())->first();
 

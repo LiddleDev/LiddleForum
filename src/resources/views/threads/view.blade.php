@@ -56,7 +56,7 @@
 			<a href="{{ route('liddleforum.categories.view', ['category' => $thread->category->slug]) }}">{{ $thread->category->name }}</a> &gt; {{ $thread->title }}
 		</p>
 
-		@foreach($thread->posts as $post)
+		@foreach($posts as $post)
 		<div class="liddleforum-post">
 			<div class="liddleforum-avatar">
 				<img src="{{ $avatar->getUrl($post->user) }}">
@@ -92,6 +92,8 @@
 			</div>
 		</div>
 		@endforeach
+
+		{!! $posts->links() !!}
 
 		@can('reply', $thread)
 			<div class="liddleforum-reply">
