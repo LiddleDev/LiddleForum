@@ -31,7 +31,9 @@ class LiddleForumServiceProvider extends ServiceProvider
             __DIR__.'/database/seeds/' => database_path('seeds'),
         ], 'seeds');
 
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
+        if (! $this->app->routesAreCached()) {
+            require __DIR__.'/routes.php';
+        }
 
         $this->loadViewsFrom(resource_path('views/vendor/liddleforum'), 'liddleforum');
 
