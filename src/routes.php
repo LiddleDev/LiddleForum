@@ -23,11 +23,6 @@ Route::group([
         'prefix' => $configHelper('routes.categories'),
     ], function () {
 
-        Route::get('/', [
-            'as' => 'all',
-            'uses' => 'CategoriesController@getCategories',
-        ]);
-
         Route::get('{category}', [
             'as' => 'view',
             'uses' => 'CategoriesController@getCategory',

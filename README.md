@@ -81,6 +81,8 @@
     ],
     ```
 
+The forum should now be viewable by going to *domain.com/forums* - however you can change the routes in the config if you wish
+
 This is all of the necessary configuration required to get up and running. Follow the next section for further customisation and features
 
 ### Additional Features / Customisation

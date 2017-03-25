@@ -7,15 +7,6 @@ use LiddleDev\LiddleForum\Models\Category;
 
 class CategoriesController extends Controller
 {
-    public function getCategories()
-    {
-        $categories = Category::get();
-
-        return view('liddleforum::categories.all', [
-            'categories' => $categories,
-        ]);
-    }
-
     public function getCategory($category)
     {
         if ( ! $category = $this->fetchCategory($category)) {
