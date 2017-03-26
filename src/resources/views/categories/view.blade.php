@@ -2,7 +2,7 @@
 
 @section('liddleforum_content_inner')
 
-	@if($category->parent_id)
+	@if($category->parent_id && Auth::user() !== null)
 		<a href="{{ route('liddleforum.threads.create', ['category' => $category->slug]) }}" class="btn btn-primary btn-sm pull-right">Create Thread</a>
 	@endif
 	<p class="thread-title">
