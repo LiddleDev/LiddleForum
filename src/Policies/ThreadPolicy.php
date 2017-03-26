@@ -37,6 +37,11 @@ class ThreadPolicy
         ;
     }
 
+    public function create(Model $user)
+    {
+        return $user !== null;
+    }
+    
     public function edit(Model $user, Thread $thread)
     {
         if (UserHelper::isModerator($user, $thread->category)) {
