@@ -40,6 +40,10 @@ class ThreadsController extends Controller
 
     public function getCreate()
     {
+        if (Gate::denies('create', Thread::class)) {
+            abort(403);
+        }
+
         $categories = Category::orderBy('parent_id')->whereNotNull('parent_id')->get();
 
         return view('liddleforum::threads.create', [
@@ -50,9 +54,7 @@ class ThreadsController extends Controller
 
     public function postCreate(Request $request)
     {
-        $thread = new Thread();
-
-        if (Gate::denies('create', $thread)) {
+        if (Gate::denies('create', Thread::class)) {
             abort(403);
         }
 

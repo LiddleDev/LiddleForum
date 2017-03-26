@@ -39,7 +39,7 @@ class ThreadPolicy
 
     public function create(Model $user)
     {
-        return $user !== null;
+        return \Auth::check();
     }
     
     public function edit(Model $user, Thread $thread)

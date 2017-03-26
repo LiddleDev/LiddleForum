@@ -2,9 +2,9 @@
 
 @section('liddleforum_content_inner')
 
-	@if($category->parent_id && \Auth::user() !== null)
+	@can('create', \LiddleDev\LiddleForum\Models\Thread::class)
 		<a href="{{ route('liddleforum.threads.create', ['category' => $category->slug]) }}" class="btn btn-primary btn-sm pull-right">Create Thread</a>
-	@endif
+	@endcan
 	<p class="thread-title">
 		<a href="{{ route('liddleforum.index') }}">Home</a> &gt;
 		@foreach($category->getCategoryChain() as $parentCategory)
