@@ -50,9 +50,12 @@ class ThreadsController extends Controller
 
     public function postCreate(Request $request)
     {
-        if (Gate::denies('create')) {
+        $thread = new Thread();
+
+        if (Gate::denies('create', $thread)) {
             abort(403);
         }
+
         $categoryObject = new Category();
 
         $validator = Validator::make($request->all(), [
