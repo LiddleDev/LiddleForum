@@ -150,4 +150,18 @@ Route::group([
             });
         });
     });
+
+    // Thread routes.
+    Route::group([
+        'as' => 'admin.',
+        'prefix' => $configHelper('routes.admin'),
+        'namespace' => 'Admin',
+    ], function () use ($configHelper) {
+
+        // View
+        Route::get('/', [
+            'as' => 'index',
+            'uses' => 'AdminController@getIndex',
+        ]);
+    });
 });

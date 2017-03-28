@@ -86,6 +86,8 @@ return [
         'threads' => 'threads',
         'categories' => 'categories',
         'replies' => 'replies',
+
+        'admin' => 'admin',
     ],
 
 

@@ -13,8 +13,12 @@ class UserHelper
      * @param Model $user
      * @return bool
      */
-    public static function isAdmin(Model $user)
+    public static function isAdmin(Model $user = null)
     {
+        if ( ! $user) {
+            return false;
+        }
+
         return (bool)Admin::where('user_id', '=', $user->getKey())->count();
     }
 
@@ -23,8 +27,12 @@ class UserHelper
      * @param Category|null $category
      * @return bool
      */
-    public static function isModerator(Model $user, Category $category = null)
+    public static function isModerator(Model $user = null, Category $category = null)
     {
+        if ( ! $user) {
+            return false;
+        }
+
         // A null category means global moderator privileges
 
         // Check if we have permission in any parent categories as well as this category

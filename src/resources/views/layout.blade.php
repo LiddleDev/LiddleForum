@@ -9,6 +9,12 @@
 
     <div class="liddleforum-container">
 
+        @if(\LiddleDev\LiddleForum\Helpers\UserHelper::isAdmin(\Auth::user()))
+            <a href="{{ route('liddleforum.admin.index') }}" class="btn btn-danger pull-right">
+                <i class="fa fa-fw fa-cog"></i> Admin Panel
+            </a>
+        @endif
+
         <h1>{{ config('liddleforum.text.heading') }}</h1>
         <h2>{{ config('liddleforum.text.subheading') }}</h2>
 
