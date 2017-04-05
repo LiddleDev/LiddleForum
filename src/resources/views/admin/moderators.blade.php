@@ -5,6 +5,8 @@
     <h3>Moderators</h3>
     <p>Manage your moderators here. Either create global moderators or limit moderators' powers to specific categories and their subcategories.</p>
 
+    @include('liddleforum::flashed.form_errors')
+
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <div class="panel panel-default">
@@ -64,11 +66,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="category">Category</label>
-                            <select id="category" name="category" class="form-control">
+                            <label for="category_id">Category</label>
+                            <select id="category_id" name="category_id" class="form-control">
                                 <option value="">- Global -</option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" @if(old('category', Request::get('category')) === $category->id) selected @endif>{{ $category->getDropdownName() }}</option>
+                                    <option value="{{ $category->id }}" @if(old('category_id', Request::get('category_id')) === $category->id) selected @endif>{{ $category->getDropdownName() }}</option>
                                 @endforeach
                             </select>
                         </div>
