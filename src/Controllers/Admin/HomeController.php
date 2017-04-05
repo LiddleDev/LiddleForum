@@ -7,7 +7,7 @@ use LiddleDev\LiddleForum\Models\Admin;
 use LiddleDev\LiddleForum\Models\Category;
 use LiddleDev\LiddleForum\Models\Moderator;
 
-class AdminController
+class HomeController
 {
     public function getIndex()
     {

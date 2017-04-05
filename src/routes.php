@@ -161,7 +161,7 @@ Route::group([
         // Index
         Route::get('/', [
             'as' => 'index',
-            'uses' => 'AdminController@getIndex',
+            'uses' => 'HomeController@getIndex',
         ]);
 
         // Admins
@@ -170,10 +170,16 @@ Route::group([
             'prefix' => 'admins',
         ], function() {
 
+            // Index
+            Route::get('/', [
+                'as' => 'index',
+                'uses' => 'AdminsController@getIndex',
+            ]);
+
             // Create
             Route::post('create', [
                 'as' => 'create',
-                'uses' => 'AdminController@postCreateAdmin',
+                'uses' => 'AdminsController@postCreateAdmin',
             ]);
 
             // Individual
@@ -184,7 +190,7 @@ Route::group([
                 // Delete
                 Route::delete('delete', [
                     'as' => 'delete',
-                    'uses' => 'AdminController@deleteAdmin',
+                    'uses' => 'AdminsController@deleteAdmin',
                 ]);
 
             });
@@ -197,10 +203,16 @@ Route::group([
             'prefix' => 'moderators',
         ], function() {
 
+            // Index
+            Route::get('/', [
+                'as' => 'index',
+                'uses' => 'ModeratorsController@getIndex',
+            ]);
+
             // Create
             Route::post('create', [
                 'as' => 'create',
-                'uses' => 'AdminController@postCreateModerator',
+                'uses' => 'ModeratorsController@postCreateModerator',
             ]);
 
             // Individual
@@ -211,10 +223,51 @@ Route::group([
                 // Delete
                 Route::delete('delete', [
                     'as' => 'delete',
-                    'uses' => 'AdminController@deleteModerator',
+                    'uses' => 'ModeratorsController@deleteModerator',
                 ]);
 
             });
+
+        });
+
+        // Categories
+        Route::group([
+            'as' => 'categories.',
+            'prefix' => 'categories',
+        ], function() {
+
+            // Create
+            Route::get('create', [
+                'as' => 'create',
+                'uses' => 'CategoriesController@getCreate',
+            ]);
+
+            Route::post('create', [
+                'as' => 'create',
+                'uses' => 'CategoriesController@postCreate',
+            ]);
+
+            // Edit
+            Route::get('edit', [
+                'as' => 'edit',
+                'uses' => 'CategoriesController@getEdit',
+            ]);
+
+            Route::post('edit', [
+                'as' => 'edit',
+                'uses' => 'CategoriesController@postEdit',
+            ]);
+
+            // Delete
+            Route::get('delete', [
+                'as' => 'delete',
+                'uses' => 'CategoriesController@getDelete',
+            ]);
+
+            Route::delete('delete', [
+                'as' => 'delete',
+                'uses' => 'CategoriesController@deleteCategory',
+            ]);
 
         });
 

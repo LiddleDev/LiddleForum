@@ -46,7 +46,7 @@
         <tr>
             <td colspan="{{ $currentCategory->parent_id ? 5 : 4 }}" style="padding: 0 0 0 50px; background-color: {{ $categoryColors[$categoryColorCount++ % count($categoryColors)] }};">
                 @foreach($currentCategory->subcategories as $subcategory)
-                    @include('liddleforum::admin.partials.category_table', ['currentCategory' => $subcategory])
+                    @include('liddleforum::admin.categories.partials.category_table', ['currentCategory' => $subcategory])
                 @endforeach
             </td>
         </tr>
