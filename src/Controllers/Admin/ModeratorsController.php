@@ -34,7 +34,7 @@ class ModeratorsController
         $moderator->delete();
 
         $request->session()->flash('liddleforum_success', 'Moderator privileges have been revoked');
-        return redirect()->route('liddleforum.admin.moderators');
+        return redirect()->route('liddleforum.admin.moderators.index');
     }
 
     /**

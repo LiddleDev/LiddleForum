@@ -179,7 +179,7 @@ Route::group([
             // Create
             Route::post('create', [
                 'as' => 'create',
-                'uses' => 'AdminsController@postCreateAdmin',
+                'uses' => 'AdminsController@postCreate',
             ]);
 
             // Individual
@@ -212,7 +212,7 @@ Route::group([
             // Create
             Route::post('create', [
                 'as' => 'create',
-                'uses' => 'ModeratorsController@postCreateModerator',
+                'uses' => 'ModeratorsController@postCreate',
             ]);
 
             // Individual

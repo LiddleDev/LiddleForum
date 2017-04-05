@@ -5,6 +5,8 @@
     <h3>Admins</h3>
     <p>Manage your admins here. Note that if you create other admin accounts, they can remove you as an admin</p>
 
+    @include('liddleforum::flashed.form_errors')
+
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <div class="panel panel-default">
@@ -26,11 +28,13 @@
                             <td>{{ $admin->user->getKey() }}</td>
                             <td>{{ $admin->user->{config('liddleforum.user.name_column')} }}</td>
                             <td>
-                                <form method="POST" action="{{ route('liddleforum.admin.admins.delete', ['id' => $admin->id]) }}">
-                                    {!! csrf_field() !!}
-                                    {!! method_field('DELETE') !!}
-                                    <button class="btn btn-danger btn-sm">Remove</button>
-                                </form>
+                                @if(\Auth::user()->getKey() !== $admin->user_id)
+                                    <form method="POST" action="{{ route('liddleforum.admin.admins.delete', ['id' => $admin->id]) }}">
+                                        {!! csrf_field() !!}
+                                        {!! method_field('DELETE') !!}
+                                        <button class="btn btn-danger btn-sm">Remove</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
