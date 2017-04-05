@@ -120,7 +120,6 @@
 	<h3>Create Category</h3>
 	<p>Create a new category or subcategory</p>
 
-
 	<form>
 		<div class="form-group">
 			<label for="name">Name</label>
@@ -133,7 +132,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="category">Category</label>
+			<label for="category">Parent Category</label>
 			<select id="category" name="category" class="form-control">
 				<option value="">Base Category</option>
 				@if(count($categories))
@@ -153,15 +152,17 @@
 	<h3>Edit Categories</h3>
 	<p>Customise the categories to be shown on your forum</p>
 
+	<ul>
+		<li><p><strong>Name:</strong> The category name to show on your forum.</p></li>
+		<li><p><strong>Slug:</strong> The identifying part of the URL. For example a slug of <em>"introductions"</em> would be used like <em>"domain.com/forums/categories/introductions"</em>. Please note that slugs have to be unique!</p></li>
+		<li><p><strong>Order:</strong> The order that you would like this category to be displayed inside the parent category. The lower the number, the earlier it will show.</p></li>
+		<li><p><strong>Parent Category:</strong> Select which category you would like this subcategory to appear in. Base categories cannot become subcategories and subcategories cannot become base categories. This is because base categories cannot have threads.</p></li>
+	</ul>
+
 	@if(count($baseCategories))
 		<form>
 			<?php
-				$categoryColors = [
-					'#eeccbb',
-					'#cceebb',
-					'#bbccee',
-					'#ff88aa',
-				];
+				$categoryColors = ['#eeccbb', '#cceebb', '#bbccee', '#ff88aa'];
 				$categoryColorCount = 0;
 			?>
 			@foreach($baseCategories as $baseCategory)
@@ -192,7 +193,7 @@
 				<select id="category" name="category" class="form-control">
 					<option value="">- Please Select -</option>
 					@foreach($categories as $category)
-						<option value="{{ $category->id }}">{{ $category->getDropdownName() }}</option>
+						<option value="{{ $category->id }}">{{ $category->getDropdownName(true) }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -206,22 +207,3 @@
 	@endif
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

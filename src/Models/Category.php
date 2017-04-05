@@ -52,7 +52,7 @@ class Category extends LiddleForumModel
         return array_reverse($categoryChain);
     }
 
-    public function getDropdownName()
+    public function getDropdownName($withThreadCount = false)
     {
         $dropdownName = '';
 
@@ -61,6 +61,15 @@ class Category extends LiddleForumModel
         }
 
         $dropdownName .= $this->name;
+
+        if ($withThreadCount) {
+            $threadCount = $this->threads()->count();
+            foreach ($this->getSubcategoriesRecursively() as $subcategory) {
+                $threadCount += $subcategory->threads()->count();
+            }
+
+            $dropdownName .= ' (' . $threadCount . ' thread' . ($threadCount === 1 ? '' : 's') . ')';
+        }
 
         return $dropdownName;
     }

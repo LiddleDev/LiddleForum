@@ -13,6 +13,12 @@
                 <input id="category[{{ $currentCategory->id }}]['slug']" name="category[{{ $currentCategory->id }}]['slug']" type="text" class="form-control" value="{{ $currentCategory->slug }}" />
             </div>
         </td>
+        <td>
+            <div class="form-group">
+                <label for="category[{{ $currentCategory->id }}]['order']">Order</label>
+                <input id="category[{{ $currentCategory->id }}]['order']" name="category[{{ $currentCategory->id }}]['order']" type="text" class="form-control" value="{{ $currentCategory->order }}" />
+            </div>
+        </td>
         @if($currentCategory->parent_id)
             <td>
                 <div class="form-group">
@@ -38,7 +44,7 @@
     </tr>
     @if(count($currentCategory->subcategories))
         <tr>
-            <td colspan="{{ $currentCategory->parent_id ? 4 : 3 }}" style="padding: 0 0 0 50px; background-color: {{ $categoryColors[$categoryColorCount++ % count($categoryColors)] }};">
+            <td colspan="{{ $currentCategory->parent_id ? 5 : 4 }}" style="padding: 0 0 0 50px; background-color: {{ $categoryColors[$categoryColorCount++ % count($categoryColors)] }};">
                 @foreach($currentCategory->subcategories as $subcategory)
                     @include('liddleforum::admin.partials.category_table', ['currentCategory' => $subcategory])
                 @endforeach
