@@ -19,7 +19,7 @@ class CreateLiddleForumCategoriesTable extends Migration
                 ->foreign('parent_id')
                 ->references('id')
                 ->on(config('liddleforum.database_prefix') . 'categories')
-                ->onDelete('set null')
+                ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
     }

@@ -15,7 +15,7 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 					<tr>
-						<th width="1%">ID</th>
+						<th width="1%">User ID</th>
 						<th>Name</th>
 						<th width="1%">Actions</th>
 					</tr>
@@ -58,7 +58,7 @@
 					<table class="table table-striped table-bordered">
 						<thead>
 						<tr>
-							<th width="1%">ID</th>
+							<th width="1%">User ID</th>
 							<th>Name</th>
 							<th>Category</th>
 							<th width="1%">Actions</th>
@@ -117,7 +117,111 @@
 
 	<hr>
 
-	<h3>Categories</h3>
+	<h3>Create Category</h3>
+	<p>Create a new category or subcategory</p>
+
+
+	<form>
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label for="slug">Slug</label>
+			<input type="text" id="slug" name="slug" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label for="category">Category</label>
+			<select id="category" name="category" class="form-control">
+				<option value="">Base Category</option>
+				@if(count($categories))
+					<option disabled="disabled">----------------------------</option>
+					@foreach($categories as $category)
+						<option value="{{ $category->id }}">{{ $category->getDropdownName() }}</option>
+					@endforeach
+				@endif
+			</select>
+		</div>
+
+		<button class="btn btn-success">Create Category</button>
+	</form>
+
+	<hr>
+
+	<h3>Edit Categories</h3>
 	<p>Customise the categories to be shown on your forum</p>
 
+	@if(count($baseCategories))
+		<form>
+			<?php
+				$categoryColors = [
+					'#eeccbb',
+					'#cceebb',
+					'#bbccee',
+					'#ff88aa',
+				];
+				$categoryColorCount = 0;
+			?>
+			@foreach($baseCategories as $baseCategory)
+				@include('liddleforum::admin.partials.category_table', ['currentCategory' => $baseCategory])
+			@endforeach
+
+			<button class="btn btn-primary" style="margin-top: 20px;">Update Categories</button>
+		</form>
+	@else
+		<div class="alert alert-info">
+			<i class="fa fa-fw fa-info-circle"></i> You do not have any categories yet
+		</div>
+	@endif
+
+	<hr>
+
+	<h3>Delete Category</h3>
+	<p>
+		Delete an existing category or subcategory.
+		<strong>This will delete all subcategories and their threads belonging to the deleted category!</strong>
+		<strong>This cannot be undone!</strong>
+	</p>
+
+	@if(count($categories))
+		<form>
+			<div class="form-group">
+				<label for="category">Category</label>
+				<select id="category" name="category" class="form-control">
+					<option value="">- Please Select -</option>
+					@foreach($categories as $category)
+						<option value="{{ $category->id }}">{{ $category->getDropdownName() }}</option>
+					@endforeach
+				</select>
+			</div>
+
+			<button class="btn btn-danger">Delete Category</button>
+		</form>
+	@else
+		<div class="alert alert-info">
+			<i class="fa fa-fw fa-info-circle"></i> You do not have any categories yet
+		</div>
+	@endif
+
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

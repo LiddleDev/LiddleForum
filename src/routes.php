@@ -141,7 +141,7 @@ Route::group([
                     ]);
 
                     // Delete
-                    Route::delete('/', [
+                    Route::delete('delete', [
                         'as' => 'delete',
                         'uses' => 'PostsController@deletePost',
                     ]);
@@ -158,10 +158,65 @@ Route::group([
         'namespace' => 'Admin',
     ], function () use ($configHelper) {
 
-        // View
+        // Index
         Route::get('/', [
             'as' => 'index',
             'uses' => 'AdminController@getIndex',
         ]);
+
+        // Admins
+        Route::group([
+            'as' => 'admins.',
+            'prefix' => 'admins',
+        ], function() {
+
+            // Create
+            Route::post('create', [
+                'as' => 'create',
+                'uses' => 'AdminController@postCreateAdmin',
+            ]);
+
+            // Individual
+            Route::group([
+                'prefix' => '{admin_id}',
+            ], function() {
+
+                // Delete
+                Route::delete('delete', [
+                    'as' => 'delete',
+                    'uses' => 'AdminController@deleteAdmin',
+                ]);
+
+            });
+
+        });
+
+        // Moderators
+        Route::group([
+            'as' => 'moderators.',
+            'prefix' => 'moderators',
+        ], function() {
+
+            // Create
+            Route::post('create', [
+                'as' => 'create',
+                'uses' => 'AdminController@postCreateModerator',
+            ]);
+
+            // Individual
+            Route::group([
+                'prefix' => '{moderator_id}',
+            ], function() {
+
+                // Delete
+                Route::delete('delete', [
+                    'as' => 'delete',
+                    'uses' => 'AdminController@deleteModerator',
+                ]);
+
+            });
+
+        });
+
     });
 });
