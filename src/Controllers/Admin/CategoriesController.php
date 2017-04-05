@@ -48,7 +48,7 @@ class CategoriesController
 
     public function deleteCategory()
     {
-        
+
     }
 
 }
