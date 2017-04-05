@@ -2,6 +2,8 @@
 
 @section('liddleforum_content_inner')
 
+    @include('liddleforum::admin.partials.tabs')
+
     <h3>Edit Categories</h3>
     <p>Customise the categories to be shown on your forum</p>
 

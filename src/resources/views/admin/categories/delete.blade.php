@@ -2,6 +2,8 @@
 
 @section('liddleforum_content_inner')
 
+    @include('liddleforum::admin.partials.tabs')
+
     <h3>Delete Category</h3>
     <p>
         Delete an existing category or subcategory.

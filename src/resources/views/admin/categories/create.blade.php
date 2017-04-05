@@ -2,6 +2,8 @@
 
 @section('liddleforum_content_inner')
 
+    @include('liddleforum::admin.partials.tabs')
+
     <h3>Create Category</h3>
     <p>Create a new category or subcategory</p>
 

@@ -2,6 +2,8 @@
 
 @section('liddleforum_content_inner')
 
+    @include('liddleforum::admin.partials.tabs')
+
     <h3>Moderators</h3>
     <p>Manage your moderators here. Either create global moderators or limit moderators' powers to specific categories and their subcategories.</p>
 

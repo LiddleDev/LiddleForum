@@ -2,6 +2,8 @@
 
 @section('liddleforum_content_inner')
 
+    @include('liddleforum::admin.partials.tabs')
+
     <h3>Admins</h3>
     <p>Manage your admins here. Note that if you create other admin accounts, they can remove you as an admin</p>
 

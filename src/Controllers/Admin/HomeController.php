@@ -8,7 +8,7 @@ class HomeController
 {
     public function getIndex()
     {
-        return view('liddleforum::admin.index', []);
+        return redirect()->route('liddleforum.admin.admins.index');
     }
 
 }
