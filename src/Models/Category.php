@@ -10,6 +10,8 @@ class Category extends LiddleForumModel
 
     public $timestamps = false;
 
+    protected $fillable = ['name', 'slug', 'order', 'parent_id'];
+
     protected static function boot()
     {
         parent::boot();
