@@ -40,6 +40,7 @@ class CreateLiddleForumThreadsTable extends Migration
                 ->foreign('category_id')
                 ->references('id')
                 ->on(config('liddleforum.database_prefix') . 'categories')
+                ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             $table

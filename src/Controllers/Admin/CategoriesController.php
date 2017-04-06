@@ -78,9 +78,19 @@ class CategoriesController
         ]);
     }
 
-    public function deleteCategory()
+    public function deleteCategory(Request $request)
     {
+        // Check if category actually exists
+        $categoryId = $request->input('category_id') ? $request->input('category_id') : null;
+        if ($categoryId === null || ! $category = Category::where('id', '=', $categoryId)->first()) {
+            $request->session()->flash('liddleforum_error', 'Invalid category');
+            return redirect()->route('liddleforum.admin.categories.delete');
+        }
 
+        $category->delete();
+
+        $request->session()->flash('liddleforum_success', 'Category and its threads has been deleted');
+        return redirect()->route('liddleforum.admin.categories.delete');
     }
 
 }

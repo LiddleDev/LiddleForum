@@ -16,8 +16,8 @@
             {!! csrf_field() !!}
             {!! method_field('DELETE') !!}
             <div class="form-group">
-                <label for="category">Category</label>
-                <select id="category" name="category" class="form-control">
+                <label for="category_id">Category</label>
+                <select id="category_id" name="category_id" class="form-control">
                     <option value="">- Please Select -</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->getDropdownName(true) }}</option>
