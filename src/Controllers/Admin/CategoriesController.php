@@ -64,9 +64,38 @@ class CategoriesController
         ]);
     }
 
-    public function postEdit()
+    public function postEdit(Request $request)
     {
+        $categoryObject = new Category();
 
+        $rules = [];
+        foreach($request->input('categories') as $id => $val)
+        {
+            $rules['categories.' . $id . '.name'] = 'required';
+            $rules['categories.' . $id . '.slug'] = 'required|unique:' . $categoryObject->getTable() . ',slug,' . $id;
+            $rules['categories.' . $id . '.order'] = 'required|integer';
+            $rules['categories.' . $id . '.parent_id'] = 'exists:' . $categoryObject->getTable() . ',id';
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('liddleforum.admin.categories.edit')
+                ->withErrors($validator, 'liddleforum')
+                ->withInput();
+        }
+
+        foreach($request->input('categories') as $id => $values)
+        {
+            if ($category = Category::where('id', '=', $id)->first()) {
+                $values = array_filter(array_intersect_key($values, array_flip(['name', 'slug', 'order', 'parent_id'])));
+                $category->update($values);
+            }
+        }
+
+        $request->session()->flash('liddleforum_success', 'Categories have been updated');
+
+        return redirect()->route('liddleforum.admin.categories.edit');
     }
 
     public function getDelete()

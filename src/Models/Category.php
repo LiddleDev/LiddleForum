@@ -120,4 +120,23 @@ class Category extends LiddleForumModel
 
         return $allSubcategories;
     }
+
+    /**
+     * Get all categories that can be used as parent category without creating circular parent chains
+     * @return Category[]
+     */
+    public function getPossibleParentCategories()
+    {
+        // TODO make more efficient. fine for now as it's only used in admin panel
+
+        $idsToExclude = [$this->id];
+
+        $subcategories = $this->getSubcategoriesRecursively();
+        foreach ($subcategories as $subcategory) {
+            $idsToExclude[] = $subcategory->id;
+        }
+
+        return Category::whereNotIn('id', $idsToExclude)->orderBy('parent_id')->get();
+
+    }
 }

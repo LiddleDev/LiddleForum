@@ -14,8 +14,11 @@
         <li><p><strong>Parent Category:</strong> Select which category you would like this subcategory to appear in. Base categories cannot become subcategories and subcategories cannot become base categories. This is because base categories cannot have threads.</p></li>
     </ul>
 
+    @include('liddleforum::flashed.form_errors')
+
     @if(count($baseCategories))
         <form method="POST" action="{{ route('liddleforum.admin.categories.edit') }}">
+            {!! csrf_field() !!}
             <?php
             $categoryColors = ['#eeccbb', '#cceebb', '#bbccee', '#ff88aa'];
             $categoryColorCount = 0;

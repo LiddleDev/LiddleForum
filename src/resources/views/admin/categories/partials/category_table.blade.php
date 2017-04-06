@@ -3,28 +3,28 @@
     <tr>
         <td>
             <div class="form-group">
-                <label for="category[{{ $currentCategory->id }}]['name']">Name</label>
-                <input id="category[{{ $currentCategory->id }}]['name']" name="category[{{ $currentCategory->id }}]['name']" type="text" class="form-control" value="{{ $currentCategory->name }}" />
+                <label for="categories[{{ $currentCategory->id }}][name]">Name</label>
+                <input id="categories[{{ $currentCategory->id }}][name]" name="categories[{{ $currentCategory->id }}][name]" type="text" class="form-control" value="{{ $currentCategory->name }}" />
             </div>
         </td>
         <td>
             <div class="form-group">
-                <label for="category[{{ $currentCategory->id }}]['slug']">Slug</label>
-                <input id="category[{{ $currentCategory->id }}]['slug']" name="category[{{ $currentCategory->id }}]['slug']" type="text" class="form-control" value="{{ $currentCategory->slug }}" />
+                <label for="categories[{{ $currentCategory->id }}][slug]">Slug</label>
+                <input id="categories[{{ $currentCategory->id }}][slug]" name="categories[{{ $currentCategory->id }}][slug]" type="text" class="form-control" value="{{ $currentCategory->slug }}" />
             </div>
         </td>
         <td>
             <div class="form-group">
-                <label for="category[{{ $currentCategory->id }}]['order']">Order</label>
-                <input id="category[{{ $currentCategory->id }}]['order']" name="category[{{ $currentCategory->id }}]['order']" type="text" class="form-control" value="{{ $currentCategory->order }}" />
+                <label for="categories[{{ $currentCategory->id }}][order]">Order</label>
+                <input id="categories[{{ $currentCategory->id }}][order]" name="categories[{{ $currentCategory->id }}][order]" type="text" class="form-control" value="{{ $currentCategory->order }}" />
             </div>
         </td>
         @if($currentCategory->parent_id)
             <td>
                 <div class="form-group">
-                    <label for="category[{{ $currentCategory->id }}]['parent_id']">Parent Category</label>
-                        <select id="category[{{ $currentCategory->id }}]['parent_id']" name="category[{{ $currentCategory->id }}]['parent_id']" class="form-control">
-                            @foreach($categories as $category)
+                    <label for="categories[{{ $currentCategory->id }}][parent_id]">Parent Category</label>
+                        <select id="categories[{{ $currentCategory->id }}][parent_id]" name="categories[{{ $currentCategory->id }}][parent_id]" class="form-control">
+                            @foreach($currentCategory->getPossibleParentCategories() as $category)
                                 @if($category->id === $currentCategory->id)
                                     @continue
                                 @endif
