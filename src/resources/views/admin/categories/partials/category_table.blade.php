@@ -4,19 +4,19 @@
         <td>
             <div class="form-group">
                 <label for="categories[{{ $currentCategory->id }}][name]">Name</label>
-                <input id="categories[{{ $currentCategory->id }}][name]" name="categories[{{ $currentCategory->id }}][name]" type="text" class="form-control" value="{{ $currentCategory->name }}" />
+                <input id="categories[{{ $currentCategory->id }}][name]" name="categories[{{ $currentCategory->id }}][name]" type="text" class="form-control" value="{{ old('categories.' . $currentCategory->id . '.name', $currentCategory->name) }}" />
             </div>
         </td>
         <td>
             <div class="form-group">
                 <label for="categories[{{ $currentCategory->id }}][slug]">Slug</label>
-                <input id="categories[{{ $currentCategory->id }}][slug]" name="categories[{{ $currentCategory->id }}][slug]" type="text" class="form-control" value="{{ $currentCategory->slug }}" />
+                <input id="categories[{{ $currentCategory->id }}][slug]" name="categories[{{ $currentCategory->id }}][slug]" type="text" class="form-control" value="{{ old('categories.' . $currentCategory->id . '.slug', $currentCategory->slug) }}" />
             </div>
         </td>
         <td>
             <div class="form-group">
                 <label for="categories[{{ $currentCategory->id }}][order]">Order</label>
-                <input id="categories[{{ $currentCategory->id }}][order]" name="categories[{{ $currentCategory->id }}][order]" type="text" class="form-control" value="{{ $currentCategory->order }}" />
+                <input id="categories[{{ $currentCategory->id }}][order]" name="categories[{{ $currentCategory->id }}][order]" type="text" class="form-control" value="{{ old('categories.' . $currentCategory->id . '.order', $currentCategory->order) }}" />
             </div>
         </td>
         @if($currentCategory->parent_id)
@@ -28,7 +28,7 @@
                                 @if($category->id === $currentCategory->id)
                                     @continue
                                 @endif
-                                <option value="{{ $category->id }}" @if($currentCategory->parent_id === $category->id) selected @endif>{{ $category->getDropdownName() }}</option>
+                                <option value="{{ $category->id }}" @if(old('categories.' . $currentCategory->id . '.parent_id', $currentCategory->parent_id) === $category->id) selected @endif>{{ $category->getDropdownName() }}</option>
                             @endforeach
                         </select>
                 </div>

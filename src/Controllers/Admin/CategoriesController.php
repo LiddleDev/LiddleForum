@@ -69,12 +69,17 @@ class CategoriesController
         $categoryObject = new Category();
 
         $rules = [];
-        foreach($request->input('categories') as $id => $val)
+        $enteredSlugs = []; // Used to make sure all inputted slugs differ
+        foreach($request->input('categories') as $id => $values)
         {
             $rules['categories.' . $id . '.name'] = 'required';
             $rules['categories.' . $id . '.slug'] = 'required|unique:' . $categoryObject->getTable() . ',slug,' . $id;
             $rules['categories.' . $id . '.order'] = 'required|integer';
             $rules['categories.' . $id . '.parent_id'] = 'exists:' . $categoryObject->getTable() . ',id';
+
+            if (isset($values['slug'])) {
+                $enteredSlugs[] = $values['slug'];
+            }
         }
 
         $validator = Validator::make($request->all(), $rules);
@@ -82,6 +87,13 @@ class CategoriesController
         if ($validator->fails()) {
             return redirect()->route('liddleforum.admin.categories.edit')
                 ->withErrors($validator, 'liddleforum')
+                ->withInput();
+        }
+
+        // Check for duplicate entered slugs as validation won't have picked it up
+        if (count($enteredSlugs) !== count(array_unique($enteredSlugs))) {
+            $request->session()->flash('liddleforum_error', 'Your entered slugs must be unique');
+            return redirect()->route('liddleforum.admin.categories.edit')
                 ->withInput();
         }
 
