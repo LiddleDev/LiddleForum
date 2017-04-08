@@ -14,7 +14,7 @@
 1. Use composer to add LiddleForum to your project
 
     ```
-    composer require "liddledev/liddleforum=0.1.*"
+    composer require "liddledev/liddleforum"
     ```
 
 2. Add the LiddleForum service provider to `config/app.php` providers:
@@ -43,17 +43,17 @@
     composer dump-autoload
     ```
 
-5. LiddleForum needs to create some tables in your database in order to function. By default all tables will use the prefix `liddleforum_` but you can change this in the config if you wish. Once you have set your prefix, run:
+6. LiddleForum needs to create some tables in your database in order to function. By default all tables will use the prefix `liddleforum_` but you can change this in the config if you wish. Once you have set your prefix, run:
 
     ```
     php artisan migrate
     ```
 
-6. In the current version, there is no Admin panel so you will need to do the following things manually
-    * Create some categories and subcategories. Some example categories can be created by running: `php artisan db:seed --class=LiddleForumExampleSeeder`
-    * Optionally add your user to the `liddleforum_admins` table to give yourself administrative powers
+7. In your database, add your personal user as an admin by adding yourself to the `liddleforum_admins` table.
 
-7. Inside the config you will see a `blade` array. You will need to fill in which layout file the pages should extend, what content section to use, and the names of two stacks which you must place in the head of your layout and just before the body closes. 
+8. Navigate to the admin panel at `domain.com/forums/admin` and add your categories. First add base categories - these cannot have threads and can only contain subcategories. Then add subcategories to these base categories to show on your home page. Alternatively, you can run the command `php artisan db:seed --class=LiddleForumExampleSeeder` to add some example categories for you.
+
+9. Inside the config you will see a `blade` array. You will need to fill in which layout file the pages should extend, what content section to use, and the names of two stacks which you must place in the head of your layout and just before the body closes. 
     For example, your layout file could look like this:
     ```
     <html>
@@ -118,15 +118,14 @@ Note: Your user model needs to use the Notifiable trait
 
 #### Moderators
 
-Since the admin panel does not exist yet, you will have to add any moderators manually in the `liddleforum_moderators` table.
+Moderators can be added in the admin panel. Navigate to the moderators tab add moderators by entering the user ID of who you'd like to be a moderator.
 
-If you want them to be a global moderator, leave `category_id` blank. Otherwise they will only have moderation powers inside the chosen category and all of its children.
+You can either make them a global moderator or limit their moderation powers to a specific category and its children.
 
 ### Roadmap
 
-Here are a list of features planned for future versions:
+Here are a list of features currently planned for future versions:
 
-* Admin panel - allows handling moderators and categories instead of doing it manually in the database
 * Themes - provide a way to easily customise the CSS on the forum
 
 ### Final Notes
