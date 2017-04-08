@@ -2,10 +2,9 @@
 
 namespace LiddleDev\LiddleForum\Controllers;
 
-use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Models\Category;
 
-class CategoriesController extends Controller
+class CategoriesController extends LiddleForumBaseController
 {
     public function getCategory($category)
     {

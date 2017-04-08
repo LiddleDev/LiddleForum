@@ -4,7 +4,7 @@ namespace LiddleDev\LiddleForum\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-class HomeController
+class HomeController extends BaseAdminController
 {
     public function getIndex()
     {

@@ -5,14 +5,13 @@ namespace LiddleDev\LiddleForum\Controllers;
 use Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Drivers\TextEditor\TextEditorInterface;
 use LiddleDev\LiddleForum\Models\Post;
 use LiddleDev\LiddleForum\Models\Thread;
 use HTMLPurifier;
 use LiddleDev\LiddleForum\Notifications\AbstractFollowedThreadReceivedReply;
 
-class PostsController extends Controller
+class PostsController extends LiddleForumBaseController
 {
     /**
      * @var HTMLPurifier

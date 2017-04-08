@@ -2,10 +2,9 @@
 
 namespace LiddleDev\LiddleForum\Controllers;
 
-use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Models\Category;
 
-class LiddleForumController extends Controller
+class LiddleForumController extends LiddleForumBaseController
 {
     public function getIndex()
     {

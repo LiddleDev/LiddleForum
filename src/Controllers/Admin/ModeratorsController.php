@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use LiddleDev\LiddleForum\Models\Category;
 use LiddleDev\LiddleForum\Models\Moderator;
 
-class ModeratorsController
+class ModeratorsController extends BaseAdminController
 {
     public function getIndex()
     {

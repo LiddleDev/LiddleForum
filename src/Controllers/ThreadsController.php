@@ -5,7 +5,6 @@ namespace LiddleDev\LiddleForum\Controllers;
 use Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use LiddleDev\LiddleForum\Drivers\Avatar\AvatarInterface;
 use LiddleDev\LiddleForum\Drivers\TextEditor\TextEditorInterface;
 use LiddleDev\LiddleForum\Helpers\ThreadHelper;
@@ -14,7 +13,7 @@ use LiddleDev\LiddleForum\Models\Thread;
 use HTMLPurifier;
 
 
-class ThreadsController extends Controller
+class ThreadsController extends LiddleForumBaseController
 {
     /**
      * @var AvatarInterface

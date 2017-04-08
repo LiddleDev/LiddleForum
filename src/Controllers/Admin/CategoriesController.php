@@ -6,7 +6,7 @@ use Validator;
 use Illuminate\Http\Request;
 use LiddleDev\LiddleForum\Models\Category;
 
-class CategoriesController
+class CategoriesController extends BaseAdminController
 {
     public function getCreate()
     {
