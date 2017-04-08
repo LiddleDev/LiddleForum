@@ -37,8 +37,9 @@
 								</p>
 								<p class="subcategory-description">{{ $subcategory->description }}</p>
 							</td>
-							<td class="text-center hidden-xs">{{ $subcategory->threads()->count() }}</td>
-							<td class="text-center hidden-xs">{{ $subcategory->posts()->count() }}</td>
+                            <?php $counts = $subcategory->getRecursiveThreadAndPostCount(); ?>
+							<td class="text-center hidden-xs">{{ $counts['threads'] }}</td>
+							<td class="text-center hidden-xs">{{ $counts['posts'] }}</td>
 							<?php $mostRecentPost = $subcategory->getMostRecentPost(); ?>
 							<td class="text-right hidden-xs hidden-sm">
 								@if($mostRecentPost)

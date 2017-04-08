@@ -107,6 +107,7 @@ class Category extends LiddleForumModel
     {
         $allSubcategories = [];
 
+        /** @var Category[] $subcategories */
         $subcategories = $this->subcategories;
 
         if ( ! count($subcategories)) {
@@ -119,6 +120,28 @@ class Category extends LiddleForumModel
         }
 
         return $allSubcategories;
+    }
+
+    /**
+     * Get the total count of all threads and posts including all children
+     * @return array
+     */
+    public function getRecursiveThreadAndPostCount()
+    {
+        $threadCount = $this->threads()->count();
+        $postCount = $this->posts()->count();
+
+        /** @var Category[] $subcategories */
+        $subcategories = $this->getSubcategoriesRecursively();
+        foreach ($subcategories as $subcategory) {
+            $threadCount += $subcategory->threads()->count();
+            $postCount += $subcategory->posts()->count();
+        }
+
+        return [
+            'threads' => $threadCount,
+            'posts' => $postCount,
+        ];
     }
 
     /**
