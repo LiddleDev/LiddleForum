@@ -12,7 +12,7 @@ class BaseAdminController extends LiddleForumBaseController
     {
         $this->middleware(function ($request, $next)
         {
-            if ( UserHelper::isAdmin(\Auth::user())) {
+            if ( ! UserHelper::isAdmin(\Auth::user())) {
                 $request->session()->flash('liddleforum_error', 'You do not have administrative privileges');
                 return redirect()->route('liddleforum.index');
             }
