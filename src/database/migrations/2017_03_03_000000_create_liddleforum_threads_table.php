@@ -13,10 +13,15 @@ class CreateLiddleForumThreadsTable extends Migration
     public function __construct()
     {
         $userClass = config('liddleforum.user.model');
-        $user = new $userClass;
+
+        if ( ! class_exists($userClass)) {
+            throw new RuntimeException(sprintf('Class "%s" does not exist', $userClass));
+        }
+
+        $user = new $userClass();
 
         if ( ! $user instanceof \Illuminate\Database\Eloquent\Model) {
-            throw new Exception('Please set your User model in your liddleforum.php config');
+            throw new RuntimeException('Please set your User model in your liddleforum.php config');
         }
 
         $this->user = $user;
