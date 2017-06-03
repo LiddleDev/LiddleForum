@@ -111,6 +111,9 @@ class ThreadsController extends LiddleForumBaseController
 
         $followingThread = \Auth::check() && (bool)$thread->followers()->where('user_id', '=', \Auth::user()->getKey())->first();
 
+        $thread->views += 1;
+        $thread->save();
+
         return view('liddleforum::threads.view', [
             'thread' => $thread,
             'posts' => $posts,
