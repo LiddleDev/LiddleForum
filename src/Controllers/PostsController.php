@@ -72,6 +72,11 @@ class PostsController extends LiddleForumBaseController
             }
         }
 
+        if ( ! $thread->has_replies) {
+            $thread->has_replies = 1;
+            $thread->save();
+        }
+
         $request->session()->flash('liddleforum_success', 'Your reply has been posted');
 
         return redirect()->route('liddleforum.threads.view', [
