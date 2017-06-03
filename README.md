@@ -49,11 +49,7 @@
     php artisan migrate
     ```
 
-7. In your database, add your personal user as an admin by adding yourself to the `liddleforum_admins` table.
-
-8. Navigate to the admin panel at `domain.com/forums/admin` and add your categories. First add base categories - these cannot have threads and can only contain subcategories. Then add subcategories to these base categories to show on your home page. Alternatively, you can run the command `php artisan db:seed --class=LiddleForumExampleSeeder` to add some example categories for you.
-
-9. Inside the config you will see a `blade` array. You will need to fill in which layout file the pages should extend, what content section to use, and the names of two stacks which you must place in the head of your layout and just before the body closes. 
+7. Inside the config you will see a `blade` array. You will need to fill in which layout file the pages should extend, what content section to use, and the names of two stacks which you must place in the head of your layout and just before the body closes. 
     For example, your layout file could look like this:
     ```
     <html>
@@ -80,6 +76,11 @@
         ]
     ],
     ```
+    
+8. In your database, add your personal user as an admin by adding yourself to the `liddleforum_admins` table.
+
+9. Navigate to the admin panel at `domain.com/forums/admin` and add your categories. First add base categories - these cannot have threads and can only contain subcategories. Then add subcategories to these base categories to show on your home page. Alternatively, you can run the command `php artisan db:seed --class=LiddleForumExampleSeeder` to add some example categories for you.
+
 
 The forum should now be viewable by going to *domain.com/forums* - however you can change the routes in the config if you wish
 
