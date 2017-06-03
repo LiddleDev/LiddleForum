@@ -105,6 +105,44 @@ return [
      */
     'middleware' => [
         'global' => ['web'],
+        'home' => [],
+        'categories' => [
+            'view' => [],
+        ],
+        'threads' => [
+            'create' => [],
+            'view' => [],
+            'edit' => [],
+            'lock' => [],
+            'unlock' => [],
+            'sticky' => [],
+            'unsticky' => [],
+            'follow' => [],
+            'unfollow' => [],
+            'delete' => [],
+        ],
+        'posts' => [
+            'create' => [],
+            'edit' => [],
+            'delete' => [],
+        ],
+        'admin' => [
+            'admins' => [
+                'index' => [],
+                'create' => [],
+                'delete' => [],
+            ],
+            'moderators' => [
+                'index' => [],
+                'create' => [],
+                'delete' => [],
+            ],
+            'categories' => [
+                'create' => [],
+                'edit' => [],
+                'delete' => [],
+            ],
+        ],
     ],
 
 
